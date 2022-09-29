@@ -1,1 +1,1 @@
-web: gunicorn Alshefaa.wsgi
+web: gunicorn project.wsgi
