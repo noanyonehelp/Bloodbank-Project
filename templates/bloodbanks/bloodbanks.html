@@ -92,12 +92,12 @@
       {% else %}
       <div class="container" id="bloodbanks_section" >
         <div class="row">
-          <div class="col">
+          <div class="col-12">
             <span class="bg-light">فرز الفصائل حسب: </span>
             <form class="form" action="#bloodbanks_section" method="GET">
               <select required="required" class="form-control" id="id_sort" name="sort">
                <option selected="selected" disabled>اختر طريقة الفرز:</option>
-               <option value="joger" {% if sort == 'jojer' %}selected{% endif %}>فصائل جوجر</option>
+               <option value="joger" {% if sort == 'joger' %}selected{% endif %}>فصائل جوجر</option>
                <option value="korama" {% if sort == 'korama' %}selected{% endif %}>فصائل ميت الكرماء</option>
                <option value="A+" {% if sort == 'A+' %}selected{% endif %}>A+</option>
                <option value="A-" {% if sort == 'A-' %}selected{% endif %}>A-</option>
@@ -114,7 +114,7 @@
           </div>
 
         
-          <div class="col mt-4">
+          <div class="col-12 mt-4">
             <span class="bg-light">فرز الفصائل حسب المنطقة ونوع الفصيلة: </span>
             <form class="form" action="#bloodbanks_section" method="GET">
 
