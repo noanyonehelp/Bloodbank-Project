@@ -17,5 +17,3 @@ urlpatterns=[
 
     path('comment/<int:bloodbankID>/userID/<int:userID>/editComment/<int:commentID>', views.editCommentBloodbank, name='editCommentBloodbank')
 ]
-
-handler404 = 'app.views.error404'

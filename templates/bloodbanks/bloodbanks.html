@@ -87,6 +87,9 @@
 
       </div>
 
+      {% if count == None or count == 0 %} 
+
+      {% else %}
       <div class="container" id="bloodbanks_section" >
         <div class="row">
           <div class="col">
@@ -111,7 +114,7 @@
           </div>
         </div>
       </div>
-      
+      {% endif %}
 
       {% if status == None %}
 
