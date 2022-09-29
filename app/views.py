@@ -36,6 +36,17 @@ def bloodbanks(request):
     countAB2 = None
     countO1 = None
     countO2 = None
+    count_two_filters = None
+    sort_city = None
+    sort_type = None
+
+    if request.method == 'GET' and 'two_filters' in request.GET:
+        sort_city = request.GET.get('sort_city')
+        sort_type = request.GET.get('sort_type')
+        bloodbanks = BloodBank.objects.filter(city=sort_city, type=sort_type)
+        count_two_filters = bloodbanks.count()
+        if sort_city is not None or sort_type is not None:
+            status = 'تم الفرز حسب منطقة: ' + sort_city + ', والفصيلة: ' + sort_type + ', وعدد نتائج البحث: ' + str(count_two_filters)
 
     if request.method == 'GET':
         sort = request.GET.get('sort')
@@ -151,7 +162,7 @@ def bloodbanks(request):
     #End Paginator
 
     
-    return render(request,'bloodbanks/bloodbanks.html',{"title": 'فصائل الدم', 'bloodbanks':bloodbanks, 'today':today, 'bloodbanks_list':bloodbanks_list, 'count':count, 'count_search':count_search, 'sort':sort, 'status': status, 'countA1':countA1, 'countJoger':countJoger, 'countKorama':countKorama, 'countA2': countA2, 'countB1':countB1, 'countB2':countB2, 'countAB1':countAB1, 'countAB2':countAB2, 'countO1':countO1,'countO2':countO2, 'latestBloodbanks':latestBloodbanks, 'bloodbankEXISTS':bloodbankEXISTS, 'alertMessage':'هل فعلا تريد حذف بيانات فصيلة الدم الخاصة بك؟'})
+    return render(request,'bloodbanks/bloodbanks.html',{"title": 'فصائل الدم', 'bloodbanks':bloodbanks, 'today':today, 'bloodbanks_list':bloodbanks_list, 'count':count, 'count_search':count_search, 'sort':sort, 'status': status, 'countA1':countA1, 'countJoger':countJoger, 'countKorama':countKorama, 'countA2': countA2, 'countB1':countB1, 'countB2':countB2, 'countAB1':countAB1, 'countAB2':countAB2, 'countO1':countO1,'countO2':countO2, 'sort_city':sort_city, 'sort_type': sort_type, 'count_two_filters':count_two_filters, 'latestBloodbanks':latestBloodbanks, 'bloodbankEXISTS':bloodbankEXISTS, 'alertMessage':'هل فعلا تريد حذف بيانات فصيلة الدم الخاصة بك؟'})
 
 
 def bloodbank_profile(request, id):
