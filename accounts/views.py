@@ -84,5 +84,5 @@ def login_view(request):
         else:
             messages.error(request, 'خطأ في اسم المستخدم أو كلمة السر!')
 
-    context = {'bloodbanks':bloodbanks, 'title':'تسجيل الدخول'}
+    context = {'title':'تسجيل الدخول', 'bloodbanks':bloodbanks}
     return render(request, 'accounts/login.html', context)

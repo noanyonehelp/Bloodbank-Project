@@ -54,7 +54,9 @@
 
 
 
-            <button name="btnsignup" type="submit" class="form-control btn btn-primary mt-3">إنشاء حساب جديد</button>
+            <button name="btnsignup" type="submit" class="form-control btn btn-primary mt-3"{% if messages %}{% for message in messages %}{% if message.tags == 'success' %}disabled{% endif %}{% endfor %}{% endif %}
+
+            >إنشاء حساب جديد</button>
 
             <p class="text-dark text-center mt-3"> 
                 إذا كنت تملك حسابًا يمكنك <a href="{% url 'login' %}">تسجيل الدخول</a>
@@ -63,7 +65,7 @@
             {% if messages %}
                 {% for message in messages %}
                 {% if message.tags == 'success' %}
-                <a class="btn btn-success form-control mt-2" href="{% url 'bloodbanks' %}">ذهاب للصفحة الرئيسية</a>
+                <a class="btn btn-success form-control mt-2" href="{% url 'login' %}">ذهاب إلى صفحة تسجيل الدخول</a>
                 {% endif %}
                 {% endfor %}
             </ul>

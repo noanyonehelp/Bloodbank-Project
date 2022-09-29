@@ -29,17 +29,17 @@
             {% if messages %}
                 {% for message in messages %}
                 {% if message.tags == 'success' %}
-                <a class="btn btn-success form-control mt-2" href="{% url 'essays' %}">ذهاب للصفحة الرئيسية</a>
+                <a class="btn btn-success form-control mt-2" href="{% url 'bloodbanks' %}">ذهاب للصفحة الرئيسية</a>
                 {% endif %}
                 {% endfor %}
                  </ul>
                 {% endif %}
                 
 
-                <div class="text-center mt-2 mb-0">
-                    <hr class="m-0 p-0 text-dark">
-                    <span class="text-dark">إذا كنت لا تملك حسابًا يمكنك </span>
-                    <a href="{% url 'signup' %}" class="btn btn-outline-primary">إنشاء حساب جديد</a>
+                <div class="text-center mt-3 mb-0">
+                    <hr class="mb-2 p-0 text-dark">
+                    <span class="text-dark mt-3">إذا كنت لا تملك حسابًا يمكنك </span>
+                    <a href="{% url 'signup' %}" class="btn btn-primary">إنشاء حساب جديد</a>
 
                 </div>
 
