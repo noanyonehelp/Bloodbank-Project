@@ -1,0 +1,56 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br> <br> <br> <br>
+<div class="container mt-5">
+    <div class="row">
+        <p class="display-6 text-dark text-center">تسجيل الدخول</p>
+
+        <div class="col-12">
+            {% if messages %}
+            <ul class="messages text-center">
+                {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-{{message.tags}} text-center p-1"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+
+        <form class="form col-11 mx-auto" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+            <div class="form-group">
+            <input name="username" class="form-control mt-2" type="text" placeholder="اسم المستخدم">
+            <input name="password" class="form-control mt-2" type="password" placeholder="كلمة السر">
+            <button type="submit" class="btn btn-primary form-control mt-2" name="login">تسجيل الدخول</button>
+
+            
+            {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'success' %}
+                <a class="btn btn-success form-control mt-2" href="{% url 'essays' %}">ذهاب للصفحة الرئيسية</a>
+                {% endif %}
+                {% endfor %}
+                 </ul>
+                {% endif %}
+                
+
+                <div class="text-center mt-2 mb-0">
+                    <hr class="m-0 p-0 text-dark">
+                    <span class="text-dark">إذا كنت لا تملك حسابًا يمكنك </span>
+                    <a href="{% url 'signup' %}" class="btn btn-outline-primary">إنشاء حساب جديد</a>
+
+                </div>
+
+
+                
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}

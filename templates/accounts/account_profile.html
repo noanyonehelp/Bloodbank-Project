@@ -1,0 +1,133 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load qr_code %}
+{% load mathfilters %}
+
+{% block content %}
+<br> <br> <br> <br>
+<h4 class="bg-secondary text-light text-center p-3"> الصفحة الشخصية </h4>
+<section class="mt-4" style="background-color: #eee; direction:rtl;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-xl-12 col-sm-12 col-xs-12 col-lg-12">
+  
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body text-center">
+              <div class="mb-4 col-md-12 col-xl-12 col-sm-12 col-xs-12 col-lg-12 p-0 m-0">
+                <img src="{% static '../static/assets/img/user-profile.png' %}"
+                  class="rounded-circle img-fluid d-inline mx-5" style="width: 100px;" />
+                  
+                  <img title="QR-CODE" src="{% qr_url_from_text request.build_absolute_uri %}"
+                  class="img-fluid d-inline mx-5" style="width: 100px;" />
+              </div>
+
+              <p title="اﻻسم الأول والأخير" class="h3 d-inline text-primary">{{user_profile.first_name}}  {{user_profile.last_name}}</p>
+              <h4 class="" title="اسم المستخدم">
+              <i class="fas fa-cog"></i>
+              اسم المستخدم: 
+                <b class="text-muted">{{user_profile.username}} </b> </h4>
+
+
+              <p class="text-muted mb-4">
+                
+                {% if user_profile.is_staff %}
+                <i class="fas fa-user-cog"></i>
+                    مدير الموقع
+                {% else %}
+                <i class="fas fa-user-check mx-2"></i>
+                    عضـو
+                {% endif %} <span class="mx-2 ">|</span> 
+                <i class="fas fa-envelope mx-2"></i>
+
+                <a
+                  href="mailto:{{user_profile.email}}">{{user_profile.email}}</a>
+                </p>
+
+                {% if user.username in request.path and request.user.is_authenticated %}
+              <button type="button" class="btn btn-primary btn-rounded btn-lg text-light">
+                <a title="تحديث البيانات" href="{% url 'edit-account' user.id user.username %}" class="text-light">
+                  <i class="fas fa-database mx-2"></i>
+                  تحديث البيانات الشخصية </a>
+              </button>
+
+              {% endif %}
+
+
+              {% if bloodbankEXISTS and request.user.is_authenticated %}
+                <hr>
+                <p>
+                  <i class="fa fa-user mx-2" aria-hidden="true"></i>
+                  اسم صاحب الفصيلة: <b class="text-danger">{{bloodbank.bloodbank_name}}</b> </p>
+                  <p>
+
+                <p>
+                  <i class="fa-solid fa-droplet mx-2"></i>
+                  نوع فصيلة الدم: <b class="text-danger">{{bloodbank.type}}</b> </p>
+                  <p>
+                    <i class="fa-solid fa-mobile-button mx-2"></i>
+                    رقم المحمول:
+                  <a href="tel:{{bloodbank.mobile}}">{{bloodbank.mobile}}</a>  
+                  </p>
+
+                  <p>
+                    <i class="fa-solid fa-location-dot mx-2"></i>
+                    العنوان:
+                  <b class="text-danger">{{bloodbank.bloodbank_addr}}</b> 
+                  </p>
+
+                  <p>
+                    <i class="fa-solid fa-city"></i>
+                    تابع لقرية:
+                  <b class="text-danger">{{bloodbank.city}}</b> 
+                  </p>
+              
+              <button type="button" class="btn btn-info mt-2 btn-rounded btn-lg text-light">
+                <a title="تحديث بيانات فصيلة الدم" href="{% url 'editbloodbank' bloodbank.id %}" class="text-light">
+                  <i class="fas fa-database mx-2"></i>
+                  تحديث بيانات فصيلة الدم </a>
+              </button>
+
+              {% else %}
+              <button type="button" class="btn btn-success mt-2 btn-rounded btn-lg text-light">
+                <a title="إضافة بيانات فصيلة الدم" href="{% url 'addnewbloodbank' %}" class="text-light">
+                  <i class="fas fa-database mx-2"></i>
+                  إضافة بيانات فصيلة الدم </a>
+              </button>
+
+              {% endif %}
+              <hr>
+
+              <div class="d-flex justify-content-center text-center mt-5 ">
+                <div class="col">
+                  <p class="h3 fw-bolder">
+                    <a href="{% url 'bloodbank_like_list' user_profile.username user_profile.id %}">{{user_profile.likeBloodbank.count}} </a>
+                    </p>
+                  <p class="text-muted mb-0">إعجاباتي</p>
+                  <i class="fa-solid fa-thumbs-up fa-2x text-secondary"></i>
+                </div>
+                <div class="col">
+                  <p class="h3 fw-bolder">
+                    <a href="{% url 'bloodbank_favourite_list' user_profile.username user_profile.id %}"> {{user_profile.favourite.count}} </a>
+                  </p>
+                  <p class="text-muted mb-0">مفضلاتي</p>
+                  <i class="fa-solid fa-star fa-2x text-secondary"></i>
+                </div>
+                
+                <div class="col"> 
+                    <br>
+                    <p class="text-muted mb-0">كيو آر كود</p>
+                    <a title="QR-Code" target="_blank" href="{% qr_url_from_text request.build_absolute_uri %}" class="alert-link"><i class="fa-solid fa-qrcode text-secondary fa-5x"></i></a>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

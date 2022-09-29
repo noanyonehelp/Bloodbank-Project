@@ -1,0 +1,89 @@
+{% load static %}
+<div class="container-fluid d-flex align-items-center justify-content-between mb-0 pb-0 n1">
+
+    <!-- Uncomment below if you prefer to use an image logo -->
+   <div class="d-inline bg-dark mb-0">
+    <a href="{% url 'bloodbanks' %}" class="logo">
+      <i class="fa-solid fa-heart-pulse text-white"></i>
+    </a>
+    <span class="logo"><a href="{% url 'bloodbanks' %}"><h2 class="d-inline"> بنك الدم </h2> </a>
+  </span>
+  </div>
+  
+    <nav id="navbar" class="navbar mb-0">
+      <ul>
+
+        {% if request.path == '/' %}
+        <li><a class="nav-link scrollto active" href="{% url 'bloodbanks' %}">
+          <i class="fa-solid fa-house-chimney-window mx-2 mb-2"></i>
+          الرئيسية</a></li>
+        {% else %}
+        <li><a class="nav-link scrollto" href="{% url 'bloodbanks' %}">
+          <i class="fa-solid fa-house-chimney-window mx-2 mb-2"></i>
+          الرئيسية</a></li>
+        {% endif %}
+
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+    {% if user.is_authenticated %}
+
+    <div class="dropdown">
+        <a class="btn btn-primary" data-bs-toggle="dropdown" id="dropdownMenuLink" aria-expanded="false" role="button">
+          <i class="fa-solid fa-user-tie mx-2"></i>
+          مرحبًا:  {{user.first_name}} {{user.last_name}} </a>
+      </a>
+    
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+
+         
+
+      {% if 'bloodbanks' in request.path %}
+        <li><a class="dropdown-item text-right" href="{% url 'bloodbank_favourite_list' user.username user.id %}">
+          <i class="fa-solid fa-star"></i>
+          الفصائل المفضلة</a></li>
+
+          <li><a class="dropdown-item text-right" href="{% url 'bloodbank_like_list' user.username user.id %}">
+            <i class="fa-solid fa-thumbs-up"></i>
+            إعجابات الفصائل</a></li>
+       {% endif %}
+
+        {% if request.path == '/accounts/password_change' %}
+        
+        <li><a class="dropdown-item text-right" href="{% url 'account_profile' user.id user.username %}">
+          <i class="fa-solid fa-user"></i>
+          الصفحة الشخصية</a></li>
+
+          <li><a class="dropdown-item text-right" href="{% url 'logout' %}">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            تسجيل خروج</a></li>
+        </ul>
+
+        {% else %}
+
+        <li><a class="dropdown-item text-right" href="{% url 'account_profile' user.id user.username %}">
+          <i class="fa-solid fa-user"></i>
+          الصفحة الشخصية</a></li>
+          
+        <li><a class="dropdown-item text-right" href="{% url 'password_change' %}">
+          <i class="fa-solid fa-key"></i>
+          تغيير كلمة السر</a></li>
+
+          <li><a class="dropdown-item text-right" href="{% url 'logout' %}">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            تسجيل خروج</a></li>
+        </ul>
+        {% endif %}
+
+        
+    </div>
+    {% else %}
+    <div class="d-inline"> 
+      <a class="btn btn-default" href="{% url 'signup' %}"> تسجيل </a>
+      <a class="btn btn-primary" href="{% url 'login' %}"> دخول </a>
+    </div>
+    {% endif %}
+  </div>

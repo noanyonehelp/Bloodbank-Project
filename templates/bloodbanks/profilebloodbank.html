@@ -1,0 +1,171 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load qr_code %}
+{% load mathfilters %}
+
+{% block content %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs" style="direction:rtl">
+
+      <div class="container">
+        <div class="d-flex justify-content-start align-items-center mt-5">
+          <ol>
+            <li>
+              <i class="fas fa-tint mx-2"></i>
+              <a href="{% url 'bloodbanks' %}">صفحة فصائل الدم </a></li>
+            <li> بيانات فصيلة الدم   </li>
+            <li class="text-muted"> {{profile.bloodbank_name}} </li>
+            <li> <i class="fa fa-eye" aria-hidden="true"></i> عدد المشاهدات: <b class="text-primary">
+              {% if count_views >= 1000 and count_views < 1000000 %}
+        {{count_views|div:"1000.0"|floatformat:1}}K
+
+        {% elif count_views >= 1000000 %}
+        {{count_views|div:"1000000.0"|floatformat:1}}M
+
+        {% else %}
+          {{count_views}}
+
+        {% endif %}
+            </b> </li>
+          </ol>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- <div class="container text-center">
+      <div class="row">
+        <div class="col alert alert-success display-6">
+          <th class="text-center" scope="col">{{context_nb_vistors}}</th>
+          <i class="fa-solid fa-eye fa-1x"></i>
+    <th class="text-center" scope="col">: زائر نشط  </th>
+
+        </div>
+      </div>
+    </div>
+  -->
+
+
+    <th>
+      <div class="container m-auto mt-4 mb-3 text-center">
+        <div class="row justify-content-center">
+          <div class="col-6">
+            
+                <img  style="width: 110px;height:110px;border-radius:50%; margin:0 auto;" src="{% static '../static/assets/img/bloodbank.png' %}">
+          </div>
+
+          <div class="col-6">
+            
+            <img  style="width: 110px;height:110px; margin:0 auto;" src="{% qr_url_from_text request.build_absolute_uri %}">
+      </div>
+        </div>
+      </div>  
+    </th>
+
+<table class="table table-bordered table-responsive table-striped">
+  <thead class="thead-light">
+      {% if user.is_authenticated %}
+      {% if is_favourite %}
+      <p class="alert alert-success p-2 text-center mb-0 h6 lh-lg"> تم إضافة فصيلة الدم إلى المفضلة، يمكنك الذهاب للمفضلة من <a href="{% url 'bloodbank_favourite_list' user.username user.id %}"> هنـا </a> </p> 
+      {% else %}
+      <p class="alert alert-info p-2 text-center mb-0 h6 lh-lg"> لم يتم إضافة هذه الفصيلة إلى المفضلة، يمكنك الضغط على النجمة الحمراء لإضافتها، كما يمكنك الذهاب للمفضلة من <a href="{% url 'bloodbank_favourite_list' user.username user.id %}"> هنـا </a> </p> 
+
+      {% endif %}
+
+      <tr>
+        <th style="width: 40%" class="text-right" scope="col">
+          <i class="fas fa-bookmark mx-1"></i>
+          أُضيفَت للمفضلة</th>
+        <th class="text-center" scope="col">
+          {% if is_favourite %}
+                      <a href="{% url 'favourite_bloodbank' profile.id %}" class="text-primary d-inline mx-1">
+                        <i class="fa-solid fa-star fa-2x text-success"></i>
+                      </a>  <b class="text-success">نعم </b>
+                      {% else %}
+                      <a href="{% url 'favourite_bloodbank' profile.id %}" class="text-primary d-inline mx-1">
+                        <i class="fa-regular fa-star fa-2x text-danger"></i>
+                      </a>  <b class="text-danger">لا  </b>
+                      {% endif %}
+        </th></tr>
+      {% endif %}
+    
+
+    <tr>
+      <th class="text-right" scope="col">
+        <i class="fas fa-database mx-1"></i>
+        رقم فصيلة الدم</th>
+      <th class="text-center" scope="col">{{profile.id}}</th></tr>
+
+      <th class="text-right" scope="col">
+        <i class="fab fa-centercode mx-1"></i>
+         تاريخ الانضمام</th>
+      <th style="direction:rtl" class="text-center" scope="col">{{profile.joined|date:'Y - m - d'}}</th></tr>
+
+    <tr>
+       <th class="text-right" scope="col">
+        <i class="fas fa-dungeon mx-1"></i>
+        انضم إلينا منذ</th>
+      <th style="direction:ltr" class="text-center" scope="col">{{profile.joined|timesince}}</th></tr>
+
+      <th class="bg-primary text-white text-right" scope="col">
+        <i class="fas fa-tint mx-1"></i>
+        اﻻسم</th><th class="text-center bg-primary text-white" scope="col">{{profile.bloodbank_name}}</th></tr>
+      
+    </thead>
+  <tbody class="">
+   <tr><th scope="col" style="direction:rtl" class="text-right">
+    <i class="fas fa-location mx-1"></i>
+    العنوان</th><th scope="col" style="direction:rtl" class="text-center">{{profile.bloodbank_addr}}</th></tr>
+
+   <tr id="like_section" class="alert alert-success"><th scope="col" style="direction:rtl" 
+    class="text-right">
+    <i class="fas fa-mobile-alt mx-1"></i>
+    رقم الموبايل</th><th scope="col" style="direction:rtl" class="text-center"> <a class="h4" href="tel:{{profile.mobile}}" target="_blank"> 
+     {% if profile.mobile == '' %} <b class="text-danger"> ﻻ يوجد رقم موبايل  </b>{% else %} {{profile.mobile}}{% endif %}
+   </a> </th></tr>
+   
+   <tr><th scope="col" style="direction:rtl" class="text-right">
+    <i class="fas fa-diagnoses mx-1"></i>
+    نوع فصيلة الدم</th><th scope="col" style="direction:rtl" class="text-center h4">{{profile.type}}</th></tr>
+   <tr><th scope="col" style="direction:rtl" class="text-right">
+    <i class="fas fa-city mx-1"></i>
+    تابع لقرية</th><th scope="col" style="direction:rtl" class="text-center">{{profile.city}}</th></tr>
+      
+    {% include 'bloodbanks/like_section.html' %}
+    
+{% if user.username == 'scriptor' %}
+              
+      <div class="container-fluid mt-4 text-center">
+        <div class="row">
+          <div class="col-4">
+            <a class="btn btn-primary p-3 text-center form-control" href="{% url 'bloodbanks' %}"> <i class="fa fa-home" aria-hidden="true"></i>  الفصائل </a>
+          </div>
+
+          <div class="col-4">
+            <a class="btn btn-warning p-3 text-center form-control" href="{% url 'editbloodbank' profile.id %}"> <i class="fa fa-edit" aria-hidden="true"></i>  تعديل </a>
+          </div>
+          <div class="col-4">
+              <a class="btn btn-danger p-3 text-center form-control" href="{% url 'delete' profile.id %}"> <i class="fa fa-trash" aria-hidden="true"></i> حذف </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% else %}
+{% endif %}
+
+
+
+  <p class="alert alert-success mt-3 text-center">يمكنك مشاركة معلومات فصيلة الدم عن طريق إرسال رابط هذه الصفحة للأصدقاء</p>
+  {% include 'partials/share.html' %}
+
+
+</div>
+
+{% include 'partials/comment.html' %}
+
+
+{% endblock content %}
+
+
+

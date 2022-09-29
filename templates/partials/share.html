@@ -1,0 +1,30 @@
+{% load social_share %}
+{% load qr_code %}
+
+{% block content %}
+
+    <div class="container-fluid d-flex justify-content-center align-items-center bg-primary pt-3 text-center display-2 text-primary card" style="background-color: #2c3e50  ">
+        <div class="row">
+            <div class="col">
+                
+                <a title="مشاركة عبر تويتر" target="_blank" href="https://twitter.com/intent/tweet?text={{request.build_absolute_uri}}" data-action="share/instagram/share"><i class="fab fa-twitter-square text-white"></i></a>
+
+                <a title="مشاركة عبر الواتساب" target="_blank" href="https://wa.me/?text={{request.build_absolute_uri}}" data-action="share/whatsapp/share"><i class="fab fa-whatsapp text-white"></i></a>
+
+                <a title="مشاركة عبر الفيسبوك" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"><i class="fab fa-facebook text-white"></i></a>
+
+                <a title="مشاركة عبر بنتريست" target="_blank" href="http://pinterest.com/pin/create/link/?url={{request.build_absolute_uri}}"><i class="fab fa-pinterest text-white"></i></a>
+
+                <a title="مشاركة الرابط عبر التليجرام" target="_blank" href="https://t.me/share/url?url={{request.build_absolute_uri}}"><i class="fa-brands fa-telegram text-white"></i></a>
+
+                <a title="QR-Code" target="_blank" href="{% qr_url_from_text request.build_absolute_uri %}" class="alert-link"><i class="fa-solid fa-qrcode text-white"></i></a>
+
+                <a title="نسخ الرابط" class="url-copy text-white mx-1" data-content="{{request.build_absolute_uri}}"> <i class="fa fa-link"></i> </a>
+
+            </div>
+        </div>
+        </div>
+      </div>
+      <p style="display:none;" class="copied alert alert-success text-center"> تم نسخ الرابط إلى الحافظة </p>
+
+{% endblock content %}

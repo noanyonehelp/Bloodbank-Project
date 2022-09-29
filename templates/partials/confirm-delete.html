@@ -1,0 +1,25 @@
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa-solid fa-triangle-exclamation mx-0"></i>
+                <b>تحذير - انتبه</b>
+            </div>
+            <div class="modal-body">
+                {{alertMessage}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">إلفاء</button>
+                <a class="btn btn-danger btn-ok" 
+                
+                {% if 'profile' in request.path %}
+                href="{% url 'deleteCommentBloodbank' profile.id user.id comment.id %}"
+
+                {% else %}
+                href="{% url 'delete' bloodbank.id %}"
+                {% endif %}>حذف
+            </a>
+            </div>
+        </div>
+    </div>
+</div>

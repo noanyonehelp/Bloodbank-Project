@@ -1,0 +1,61 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load qr_code %}
+{% load mathfilters %}
+
+{% block content %}
+
+{% comment %} {% if not user.username in request.path %}
+<br> <br> <br>
+<section class="breadcrumbs mt-5" style="direction:rtl">
+
+        <h4 class="alert alert-danger text-center">عذرًا، هذه الصفحة خاصة وليس لديك حق الوصول إليها  </h4>
+</section>
+
+{% else %} {% endcomment %}
+
+<br> <br> <br>
+<section class="breadcrumbs mt-5" style="direction:rtl">
+    <ol>
+        <li>
+            <i class="fas fa-store mx-2"></i>
+            <a href="{% url 'store' %}"> المتجر </a></li>
+        <li> المنتجات </li>
+        <li class="text-muted"> العضو: <b class="text-info">{{user_profile.first_name}} {{user_profile.last_name}}</b> </li>
+</section>
+
+    <div class="container">
+        <div class="row">
+            <table class="table table-striped table-bordered table-hover table-active table-dark table-responsive{-sm|-md|-lg|-xl} ">
+
+                <thead class="thead-light">
+                  <tr>
+                    <b class="alert alert-info p-2 mb-0 text-center"> عدد المنتجات الخاصة بك: {{userProduct.count}} </b>
+
+                    {% for product in userProduct %}
+                    <th class="text-center" scope="col">
+                        <a target="_blank" href="{% url 'product' product.id %}"><i class="fa-solid fa-id-card text-white mx-0"></i>
+                        </a>
+                    </th>
+
+                    <th class="text-right" scope="col">
+                        <a href="{% url 'product' product.id %}" class="text-light d-inline mx-1 h5">
+                            <i class="fas fa-store mx-2"></i>
+                            <b class="text-warning">  اسم المنتج: </b> {{product.name}}
+                        </a> 
+                    </th>
+                    
+                </tr>
+                    {% empty%}
+                        <p class="alert alert-danger"> ﻻ يوجد لديك منتجات </p>
+                    {% endfor %}       
+                </thead>
+                <tfoot>
+                </table>
+
+        </div>
+    </div>
+
+{% comment %} {% endif %} {% endcomment %}
+    {% endblock content %}

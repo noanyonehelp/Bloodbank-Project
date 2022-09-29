@@ -1,0 +1,99 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load mathfilters %}
+
+
+
+{% block content %}
+<br> <br> <br>
+<section class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4 class="alert alert-info text-center">صفحة تعديل بيانات فصيلة الدم</h4>
+            </div>
+
+                    <form method="POST" class="form">
+                        {% csrf_token %}
+
+                        <div class="container">
+                            <div class="row">
+
+                        <div class="col-6 col-sm-6 col-xs-12">
+                            <label class="form-label" for="bloodbank_name">الاسم</label>
+                            <input autofocus type="text" id="bloodbank_name"
+                                name="bloodbank_name" class="form-control"
+                                value="{{bloodbank.bloodbank_name}}">
+                            <small class="text-muted mb-3">اسم صاحب فصيلة الدم</small>
+                        </div>
+
+                        <div class="col-6 col-sm-6 col-xs-12">
+                            <label class="form-label mt-2" for="bloodbank_addr">العنوان</label>
+                            <input type="text" id="bloodbank_addr"
+                                name="bloodbank_addr" class="form-control"
+                                value="{{bloodbank.bloodbank_addr}}">
+                            <small class="text-muted mb-3">عنوان صاحب فصيلة الدم</small>
+                        </div>
+
+                        <div class="col-6 col-sm-6 col-xs-12">
+                            <label class="form-label" for="mobile">رقم المحمول</label>
+                            <input id="mobile" class="number form-control"
+                                placeholder="رقم المحمول" maxlength="11"
+                                name="mobile" value="{{bloodbank.mobile}}" pattern="[0-9]*" inputmode="numeric">
+                            <small class="text-muted">رقم المحمول يجب أن يبدأ بـ
+                                01</small>
+                        </div>
+
+
+                        <div class="col-6 col-sm-6 col-xs-12" >
+                            <label class="form-label" for="bloodbank_type">النوع</label>
+                            
+                            <select class="form-control" name="type">                         
+                            <option value="" selected disabled>{{bloodbank.type}}</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            </select>
+                            <small class="text-muted mb-3">نوع فصيلة الدم</small>
+                        </div>
+
+
+                        <div class="col-6 col-sm-6 col-xs-12" >
+                            <label class="form-label" for="bloodbank_type">القرية</label>
+                        
+                            <select class="form-control" name="city">                         
+                            <option value="" selected disabled>{{bloodbank.city}}</option>
+                            <option value="جوجر">جوجر</option>
+                            <option value="ميت الكرماء">ميت الكرماء</option>
+                            </select>
+                            <small class="text-muted mb-3">قرية صاحب الفصيلة</small>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                        <button class="btn btn-success form-control mb-4"
+                            type="submit">تعديل وحفظ</button>
+                            
+                        <a class="btn btn-danger form-control mb-4" href="{% url 'profilebloodbank' bloodbank.id %}"> تراجع وإلغاء </a>
+
+                    </form>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

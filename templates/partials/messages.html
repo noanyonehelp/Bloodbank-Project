@@ -1,0 +1,25 @@
+{% if not user.is_authenticated %}
+
+
+{% else %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="alert alert-{{msg.tags}}">{{msg}}</p>
+                </div>
+            </div>
+        </div>          
+    {% endfor %}
+
+{% else %}
+
+
+
+
+{% endif %}
+
+{% endif %}

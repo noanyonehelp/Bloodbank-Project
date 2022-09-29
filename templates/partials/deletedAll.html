@@ -1,0 +1,17 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+
+
+    <section class="container mt-5">
+        <div class="row mt-5">
+            <div class="col">
+                <p class="alert alert-success">تم حذف الجميع بنجاح</p>
+                <a href="{% url url %}">
+                    
+                    عودة إلى صفحة {{page}}
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

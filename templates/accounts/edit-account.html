@@ -1,0 +1,52 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br> <br> <br>
+   <section class="mt-5">
+    <p class="mt-5 display-4 text-center"> تعديل بيانات الحساب </p>
+
+    {% if user.is_authenticated %}
+
+    <form method="POST" class="form">
+        
+        {% csrf_token %}
+
+        <div class="container m-auto">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="fname"> اﻻسم الأول</label>
+                        <input value="{{user.first_name}}" id="fname" class="fname form-control" type="text" name="fname" autofocus>
+                    </div>
+                    
+                </div>
+
+                    <div class="col-md-6">
+                        <label for="lname"> اﻻسم الأخير</label>
+                            <input value="{{user.last_name}}" id="lname" class="lname form-control" type="text" name="lname">                    
+                    </div>                
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        
+                        <label for="username"> اسم المستخدم </label>
+                            <input value="{{user.username}}" id="username" class="username form-control" type="text" name="username">
+                    </div>
+                   
+                    <label for="email"> البريد الالكتروني</label>
+                        <input value="{{user.email}}" id="email" class="email form-control" type="text" name="email">
+
+            <button name="btneditsave" type="submit" class="form-control btn btn-primary mt-3">تعديل وحفظ</button>
+
+                <a class="btn btn-danger form-control mt-3 text-light" href="{% url 'account_profile' user.id user.username %}"> إلغاء ورجوع للصفحة الشخصية </a>
+
+        </div>
+        </div>
+    </div>   
+    </form>
+    {% endif %}
+   </section>
+
+{% endblock content %}

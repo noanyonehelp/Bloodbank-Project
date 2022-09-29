@@ -1,0 +1,173 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load mathfilters %}
+{% load qr_code %}
+
+{% block content %}
+<br> <br> <br>
+<section class="mt-5 text-center">
+  <h1 class="mb-1" id="top"  style="color: #2c3e50">فصائل الشفـــاء</h1>
+  <small class="alert alert-primary p-0 mt-0 h4">(وَمَنْ أَحْيَاهَا فَكَأَنَّمَا أَحْيَا النَّاسَ جَمِيعاً)</small>
+  <h6 class="text-muted mx-3 lh-lg">يمكنك البحث عن أي فصيلة عن طريق إدخال أي حرف من اسم صاحبها ثم يظهر لك الإكمال التلقائي تسهيلا عليك</h6>
+
+<form method="GET" class="container form w-100 m-auto text-center" action="#bloodbanks_section" id="form">
+  {% csrf_token %}
+  <div class="form-group">
+    <input list="bloodbankslist" type="text" class="form-control text-center text-muted" id="search_bloodbank" name="search_bloodbank" placeholder="ابحث هنا" required>
+    <datalist id="bloodbankslist">
+      {% for bloodbank in bloodbanks %}
+        <option value="{{bloodbank.bloodbank_name}}" ></option>
+      {% endfor %}
+    </datalist>
+    <p class="alert alert-warning">
+      <i class="fa-brands fa-searchengin text-dark mx-2"></i>
+    <b class="text-dark"> تنبيه: </b> البحث باللغة العربية فقط</p>
+
+    {% if count_search == 0 %}
+    <div class="container rounded">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="alert alert-danger text-center p-3">لا توجد بيانات مطابقة لهذا البحث</h2>
+      </div>
+      {% endif %}
+
+
+    <button type="submit" class="btn text-white form-control"  style="background-color: #2c3e50  ">ابحث</button>
+  </div>
+</form>
+
+<!-- Start Latest Data -->
+    <div class="container">
+      <div class="row">
+        <table class="table table-striped table-bordered table-hover table-active table-responsive table-sm">
+          <tbody class="text-end">
+            
+            <p class="h6 text-dark text-end mt-0 mx-4 bg-default">
+              <i class="fa-solid fa-hourglass mx-2 text-secondary"></i>
+              أحدث الفصائل</p>
+            <tr>
+              {% for latest in latestBloodbanks %}
+              <th scope="col"><a href="{% url 'profilebloodbank' latest.id %}">{{latest.bloodbank_name}} | <b class="text-danger">{{latest.type}} </b> | </a></th>
+              {% endfor %}
+            </tr>
+          </tbody>
+    </table>
+      </div>
+    </div>
+<!-- End Latest Data -->
+
+</section>
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs mt-0">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <ol>
+            <li><a href="{% url 'bloodbanks' %}">الصفحة الرئيسية</a></li>
+            <li> صفحة {{title}}</li>
+          </ol>
+          
+
+          {% if not bloodbankEXISTS and request.user.is_authenticated %}
+          <a href="{% url 'addnewbloodbank' %}"><button class="btn text-white" style="background-color: #2c3e50  ">إضافة بيانات فصيلة الدم</button></a>
+          
+          {% else %}
+
+          {% endif %}
+
+          <h4>إجمالي عدد الفصائل: <b class="text-danger">({{count}})</b></h4>
+          
+          {% if 'search_bloodbank' in request.GET %}
+          <h4>  إجمالي نتيجة البحث: <b class="text-danger">({{count_search}})</b></h4>
+          {% endif %}
+
+        </div>
+
+      </div>
+
+      <div class="container" id="bloodbanks_section" >
+        <div class="row">
+          <div class="col">
+            <span class="bg-light">فرز الفصائل حسب: </span>
+            <form class="form" action="#bloodbanks_section" method="GET">
+              <select class="form-control" id="id_sort" name="sort">
+               <option selected="selected" disabled>اختر طريقة الفرز:</option>
+               <option value="joger">فصائل جوجر</option>
+               <option value="korama">فصائل ميت الكرماء</option>
+               <option value="A+">A+</option>
+               <option value="A-">A-</option>
+               <option value="B+">B+</option>
+               <option value="B-">B-</option>
+               <option value="AB+">AB+</option>
+               <option value="AB-">AB-</option>
+               <option value="O+">O+</option>
+               <option value="O-">O-</option>
+               <option value="all">جميع الفصائل</option>
+              </select>
+              <input class="form-control btn text-white" style="background-color: #2c3e50  " type="submit" value="فرز">
+         </form>
+          </div>
+        </div>
+      </div>
+      
+
+      {% if status == None %}
+
+      {% else %}
+      <div class="container rounded">
+        <div class="row">
+          <div class="col-md-12">
+            {% if count_search == 0 or countA1 == '0' or countJoger == '0' or countKorama == '0' or countA2 == '0' or countB1 == '0' or countB2 == '0' or countAB1 == '0' or countAB2 == '0' or countO1 == '0' or countO2 == '0' %}
+            <h5 class="alert alert-danger text-center p-3">{{status}}</h5>
+
+            {% else %}
+            <h5 class="alert alert-success text-center p-3">{{status}}</h5>
+            {% endif %}
+          </div>
+
+      {% endif %}
+    </section><!-- End Breadcrumbs -->
+
+
+
+    {% include 'bloodbanks/bloods-section.html' %}
+
+     
+     {% if bloodbanks_list.has_other_pages %}
+          <div class="container d-flex justify-content-center">
+            <div class="row">
+              <div class="all_bloodbanks_pagination">
+                <nav aria-bloodbankel="Page navigation example">
+                  <ul class="pagination pagination-lg justify-content-center">
+
+                    {% if bloodbanks_list.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{bloodbanks_list.previous_page_number}}">السابق</a></li>
+                    {% else %}
+                    <li class="disabled"></li>
+                    {% endif %}
+                    
+                    {% for pages in bloodbanks_list.paginator.page_range %}
+                      {% if bloodbanks_list.number == pages %}
+                    <li class="page-item active"><a class="page-link" href="#">{{pages}}</a></li>
+                      {% else %}
+                      <li class="page-item"><a class="page-link" href="?page={{pages}}">{{pages}}</a></li>
+
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if bloodbanks_list.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{bloodbanks_list.next_page_number}}">التالي</a></li>
+                    {% else %}<li class=""></li>
+                    <li class=""></li>
+                    {% endif %}
+
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        
+{% endblock content %}

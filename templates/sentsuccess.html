@@ -1,0 +1,16 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+
+
+    <section class="container mt-5">
+        <div class="row mt-5">
+            <div class="col">
+                <p class="alert alert-success">تم إرسال الرسالة بنجاح</p>
+                <a href="{% url 'home' %}">
+                    عودة إلى الصفحة الرئيسية
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

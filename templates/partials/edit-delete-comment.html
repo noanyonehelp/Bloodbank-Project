@@ -1,0 +1,76 @@
+{% comment "BloodBank" %}{% endcomment %}
+{% if request.user == comment.userProfile %}
+<div class="float-start">
+<form>
+    <a class="text-white" href="{% url 'editCommentBloodbank' profile.id user.id comment.id %}"> <i class="fas fa-edit text-warning mx-3"></i> </a>
+</form>
+</div>
+
+<div class="float-start">
+<form method="GET" action="">
+        <a class="text-white" data-toggle="modal" data-target="#confirm-delete"> <i class="fa fa-trash text-danger"></i> </a>
+        
+        {% include 'partials/confirm-delete.html' %}
+</form>
+</div>
+{% endif %}
+{% comment "BloodBank" %}{% endcomment %}
+
+
+{% if request.user == comment.userProfileDoctor %}
+<div class="float-start">
+<form>
+        <a class="text-white" href="{% url 'editCommentDoctor' profile.id user.id comment.id %}"> <i class="fas fa-edit text-warning mx-3"></i> </a>
+    </form>
+</div>
+
+<div class="float-start">
+    <form method="GET" action="">
+        <a class="text-white" href="{% url 'deleteCommentDoctor' profile.id user.id comment.id %}"> <i class="fa fa-trash text-danger"></i> </a>    
+</form>
+</div>  
+{% endif %}
+
+{% if request.user == comment.userProfileLab %}
+<div class="float-start">
+<form>
+    <a class="text-white" href="{% url 'editCommentLab' profile.id user.id comment.id %}"> <i class="fas fa-edit text-warning mx-3"></i> </a>
+</form>
+</div>
+
+<div class="float-start">
+<form method="GET" action="">
+        <a class="text-white" href="{% url 'deleteCommentLab' profile.id user.id comment.id %}"> <i class="fa fa-trash text-danger"></i> </a>    
+</form>
+</div>  
+{% endif %}
+
+
+
+{% if request.user == comment.userprofilepharmacy %}
+<div class="float-start">
+<form>
+        <a class="text-white" href="{% url 'editCommentPharmacy' profile.id user.id comment.id %}"> <i class="fas fa-edit text-warning mx-3"></i> </a>
+</form>
+</div>
+
+<div class="float-start">
+<form>
+        <a class="text-white" href="{% url 'deleteCommentPharmacy' profile.id user.id comment.id %}"> <i class="fa fa-trash text-danger"></i> </a>    
+</form>    
+</div>
+{% endif %}
+
+
+{% if request.user == comment.userProfilePost %}
+<div class="float-start">
+<form>
+        <a class="text-white" href="{% url 'editCommentPost' profile.id user.id comment.id %}"> <i class="fas fa-edit text-warning mx-3"></i> </a>
+    </form>
+</div>
+<div class="float-start">
+    <form method="GET" action="">
+        <a class="text-white" href="{% url 'deleteCommentPost' post.id user.id comment.id %}"> <i class="fa fa-trash text-danger"></i> </a>
+</form>
+</div>
+{% endif %}

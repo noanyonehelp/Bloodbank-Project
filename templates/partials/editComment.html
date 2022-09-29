@@ -1,0 +1,34 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+
+<br> <br> <br>
+    <section class="container mt-5">
+        <div class="row mt-5">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                <input class="form-control" type="textarea" value="{{comment}}" name="editcomment">
+                <button id="edit" type="submit" class="mt-4 form-control btn btn-warning mb-3 h3">
+                     تعديل
+                    </button>
+
+                    <button class="mt-4 form-control btn btn-success">
+                         <a class="text-white" href="{% url url profile.id %}#comment_section"> رجوع إلى تعليقات {{page}} </a>
+                       </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+	
+<script type="text/javascript">
+
+    window.location.hash = "no-back-button";
+    // Again because Google Chrome doesn't insert
+    // the first hash into the history
+    window.location.hash = "Again-No-back-button"; 
+
+    window.onhashchange = function(){
+        window.location.hash = "no-back-button";
+    }</script>
+{% endblock content %}

@@ -1,0 +1,93 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br> <br> <br>
+   
+<section class="mt-2">
+    <p class="mt-5 display-6 text-dark text-center"> إنشاء حساب جديد </p>
+    
+    {% if messages %}
+    <ul class="messages text-center">
+        {% for message in messages %}
+        <li{% if message.tags %} class="alert alert-{{message.tags}} text-center p-1"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+    <form method="POST" class="form">
+        
+        {% csrf_token %}
+
+        <div class="container m-auto">
+            <div class="row mb-2">
+                <div class="col-md-6">
+                        <input autofocus required class="form-control" name="first_name" placeholder="اﻻسم الأول" value="{% if first_name == None %}{% else %}{{first_name}}{% endif %}">
+                </div>
+
+                    <div class="col-md-6">
+                            <input required class="form-control" name="last_name" placeholder="اﻻسم الأخير" value="{% if last_name == None %}{% else %}{{last_name}}{% endif %}">
+                    </div>  
+
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-6">
+                        <input required class="form-control" name="username" placeholder="اسم المستخدم" value="{% if username == None %}{% else %}{{username}}{% endif %}">
+                    </div>
+
+                <div class="col-md-6">
+                        <input required class="form-control" name="email" placeholder="البريد الالكتروني" type="email" value="{% if email == None %}{% else %}{{email}}{% endif %}">
+                    </div>
+            </div>
+
+
+            <div class="row mb-2">
+                <div class="col-md-12">
+                        <input required id="id_password" class="form-control" name="password" placeholder="كلمة المرور" type="password" value="{% if password == None %}{% else %}{{password}}{% endif %}">
+                    </div>
+
+            </div>
+
+            <input id="pass-check" class="mt-1" type="checkbox" onclick="reveal()"> 
+            <label class="text-dark"> إظهار كلمة السر </label>
+
+
+
+            <button name="btnsignup" type="submit" class="form-control btn btn-primary mt-3">إنشاء حساب جديد</button>
+
+            <p class="text-dark text-center mt-3"> 
+                إذا كنت تملك حسابًا يمكنك <a href="{% url 'login' %}">تسجيل الدخول</a>
+            </p>
+       
+            {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'success' %}
+                <a class="btn btn-success form-control mt-2" href="{% url 'bloodbanks' %}">ذهاب للصفحة الرئيسية</a>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+
+        
+    </form>
+
+   </section>
+
+   <script>
+    function reveal(){
+        var passCheck = document.getElementById('pass-check');
+        var passInput1 = document.getElementById('id_password');
+
+        if (passCheck.checked){
+            passInput1.type = 'text'
+
+        } else{
+            passInput1.type = 'password'
+        }
+    }
+</script>
+{% endblock content %}

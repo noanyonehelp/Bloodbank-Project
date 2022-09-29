@@ -1,0 +1,105 @@
+{% load static %}
+{% load qr_code %}
+{% load mathfilters %}
+
+{% if count_search == 0 or countA1 == '0' or countJoger == '0' or countKorama == '0' or countA2 == '0' or countB1 == '0' or countB2 == '0' or countAB1 == '0' or countAB2 == '0' or countO1 == '0' or countO2 == '0' %}
+
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row">
+ <div class="col-md-12">
+  <form method="GET" action="#bloodbanks_section" class="form">
+    {% csrf_token %}
+   
+     <input type="submit" class="form-control bg-primary text-white text-center p-3" value="استعراض جميع الفصائل">
+  </form> <br>
+</div>
+
+<br>
+  <div class="col-md-12">
+ <a href="#top">
+   <h4 class="bg-info text-white text-center p-3">إعادة البحث من جديد</h4>
+ </a>
+ </div>
+ </div>
+ </div>
+       
+ {% else %}
+
+<div class="container rounded">
+  {% for bloodbank in bloodbanks %}
+  <div class="row bg-light pt-3 rounded pt-1 mb-3">
+    <div class="col-2">
+      <a href="{% url 'profilebloodbank' bloodbank.id %}"><img class="d-inline" style="width: 70px;height:70px;" src="{% static '../static/assets/img/bloodbank.png' %}"> </a>
+      </div>
+    <div class="col-7">
+
+      <a href="{% url 'profilebloodbank' bloodbank.id %}" id="{{bloodbank.id}}">
+        <i class="fa-solid fa-user text-dark"></i> &nbsp; 
+        <span class="h5 text-primary">{{bloodbank.bloodbank_name}}</span> <br>
+      </a>
+      <span class="h6"> <i class="fa-solid fa-location-dot"></i> &nbsp;  </span> <span class="h6 text-secondary">{{bloodbank.bloodbank_addr}}</span><br>
+
+      <span class="h5 mt-2"> <i class="fa-solid fa-mobile-screen-button"></i> &nbsp;  <b class="text-primary"><a href="tel:{{bloodbank.mobile}}"> {{bloodbank.mobile}}</a> </b></span> 
+      | <a class="text-secondary mx-2"> <i class="fa-solid text-primary fa-thumbs-up"></i>   {{bloodbank.total_likes}} </a>
+      |
+      <i class="fas fa-comment-dots"></i> {{bloodbank.comments.all.count}}
+
+       <br> 
+
+     <span class="h6 mt-1"><i class="fa-solid fa-droplet"></i> &nbsp; <b class="text-success"> {{bloodbank.type}} </b></span>    <span class="mx-2" style="border-left: 2px solid black; height:25px;"></span>
+     <span class="h6 mt-1"><i class="fa-solid fa-map-location-dot"></i> &nbsp;<b class="text-success"> {{bloodbank.city}} </b></span>
+     
+      | <i class="fa fa-eye" aria-hidden="true"></i>  <b class="text-primary">
+        {% if bloodbank.count_views >= 1000 and bloodbank.count_views < 1000000 %}
+        {{bloodbank.count_views|div:"1000.0"|floatformat:1}}K
+
+        {% elif bloodbank.count_views >= 1000000 %}
+        {{bloodbank.count_views|div:"1000000.0"|floatformat:1}}M
+
+        {% else %}
+          {{bloodbank.count_views}}
+
+        {% endif %}
+      </b>
+
+    </div>
+     
+      <div class="col-3">
+      
+          <a class="copy btn text-primary my-2 h6 d-inline" data-content="
+          اسم صاحب الفصيلة: {{bloodbank.bloodbank_name}} &amp; &nbsp; رقم الموبايل: {{bloodbank.mobile}} &amp; &nbsp; نوع الفصيلة: {{bloodbank.type}} &amp; &nbsp; العنوان: {{bloodbank.bloodbank_addr}}"> <i class="fas fa-copy"></i> </a>
+
+          <a href="{% url 'profilebloodbank' bloodbank.id %}" class="text-primary d-inline">
+            <i class="fa-solid fa-circle-info"></i>
+          </a>
+              <br>
+
+          {% if user.is_authenticated and bloodbank.user == request.user %}
+          <a class="text-warning my-2" href="{% url 'editbloodbank' bloodbank.id %}">
+            <i class="fa fa-edit fa-2x mt-4 mx-1"></i>
+            </a>
+            <a data-toggle="modal" data-target="#confirm-delete" class="mt-1 mx-1"> 
+              <i class="fa fa-trash fa-2x mt-4 mx-1"></i>  
+            </a>
+
+            {% include 'partials/confirm-delete.html' %}
+          {% else %}{% endif %}
+
+        </div>
+          </div>
+
+        {% empty %}
+          <div class="container rounded">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="alert alert-danger text-center p-3">قاعدة البيانات فارغة</h2>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+      {% endfor %}
+
+    </div>
+    {% endif %}
+

@@ -1,0 +1,38 @@
+
+    {% if user.is_authenticated %}
+    <tr>
+    <th scope="col" style="direction:rtl" class="text-right"> 
+      <i class="fas fa-thumbs-up mx-1"></i>
+     أعجبني
+    </th>
+
+      {% if is_like_bloodbank %}
+      <th scope="col" style="direction:rtl" class="text-center">
+        <a class="text-secondary" href="{% url 'like_bloodbank' profile.id %}" onclick="location.href=('#like_section')"> <i class="fa-solid text-primary fa-thumbs-up submit"></i> 
+       
+        </a> <b class="h5 mx-2 text-primary"> نعم </b>
+      </th>
+      {% else %}
+      
+    <th scope="col" style="direction:rtl" class="text-center">
+      <a class="text-secondary" href="{% url 'like_bloodbank' profile.id %}" onclick="location.href=('#like_section')"> <i class="fa-solid text-danger fa-thumbs-down"></i>  </a> <b class="h5 mx-2 text-danger"> لا </b>
+    </th>
+    {% endif %}
+
+    {% else %}
+    
+    {% endif %}
+
+    
+  </tbody>
+</table>
+
+    {% if user.is_authenticated %}
+      {% if is_like_bloodbank %}
+      <p class="alert alert-success p-0 text-center mb-0 h6 lh-lg"> تم إضافة فصيلة الدم إلى الإعجابات، ويمكنك الذهاب للإعجابات من <a href="{% url 'bloodbank_like_list' user.username user.id %}"> هنـا </a> </p> 
+      {% else %}
+      <p class="alert alert-info p-0 text-center mb-0 h6 lh-lg"> لم يتم إضافة هذه الفصيلة إلى الإعجابات، ويمكنك الضغط على اللايك الأحمر لإضافتها، كما يمكنك الذهاب للإعجابات من <a href="{% url 'bloodbank_like_list' user.username user.id %}"> هنـا </a> </p> 
+
+      {% endif %}
+      {% else %}
+      {% endif %}

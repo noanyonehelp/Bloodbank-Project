@@ -1,0 +1,281 @@
+{% extends 'partials/base.html' %} {% load crispy_forms_tags %} 
+
+{% block content %}
+
+<main id="main" class="mt-5">
+  <!-- ======= About Boxes Section ======= -->
+  <section id="about-boxes" class="about-boxes mt-5">
+    <!-- 
+      Marquee
+    -->
+    {% include 'partials/foursection.html'%}
+
+    <div class="container mt-5" data-aos="fade-up">
+      <div class="row">
+        <div
+          class="col-lg-4 col-md-6 d-flex align-items-stretch"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="card mt-4 mb-0">
+
+            <div class="card-icon">
+              <i class="ri-brush-4-line mt-4"></i>
+            </div>
+            <div class="card-body">
+              <h3 style="color: #2c3e50  ;" class="card-title mt-1">مهمتنا</h3>
+              <p class="card-text text-center">
+                مهمتنا هي بث الراحة والطمأنينة داخل النفوس التي تتألم ولا يعلم
+                ما بداخلها إلا الله، ونسعى لخدمة المسلمين جميعا؛ لكي يتحقق فينا
+                قول النبي صلى الله عليه وسلم: والله في عون العبد ما دام العبد في
+                عون أخيه
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-lg-4 col-md-6 d-flex align-items-stretch"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div class="card mt-4 mb-0">
+          
+            <div class="card-icon">
+              <i class="ri-calendar-check-line mt-4"></i>
+            </div>
+            <div class="card-body">
+              <h3 style="color: #2c3e50  ;" class="card-title mt-1">خطتنا</h3>
+              <p class="card-text text-center">
+                بمشيئة الله سنبدأ بحصر جميع الأطباء في قرية جوجر وميت الكرماء،
+                وسيأتي الدور على القرى المجاورة في المستقبل القريب بإذن الله،
+                راجين من الله العون والقبول، ونسأله أن يجعل عملنا خالصا لوجهه
+                الكريم، وألا يحرمنا الأجر
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-lg-4 col-md-6 d-flex align-items-stretch"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <div class="card mt-4 mb-0">
+
+            <div class="card-icon">
+              <i class="ri-movie-2-line mt-4"></i>
+            </div>
+            <div class="card-body">
+              <h3 style="color: #2c3e50  ;" class="card-title mt-1">رؤيتنا</h3>
+              <p class="card-text text-center">
+                نتطلع إلى مستقبل مشرق لطيف خالٍ من الأمراض، عن طريق التعاون على
+                نشر الخير بين الناس بأي وسيلة كانت، كل واحد على حسب مجاله،
+                فحسبنا أن ينفع المرء دينه وأهله، وما أجمل أن يحيا الناس بين
+                بعضهم محبين
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End About Boxes Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials">
+    <div class="container" data-aos="zoom-in">
+      <div
+        class="testimonials-slider swiper"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img
+                src="assets/img/testimonials-2.jpg"
+                class="testimonial-img"
+                alt=""
+              />
+              <h2 class="text-warning">أطباء الشفاء</h2>
+              <h3>نخبة وكوكبة من الأطباء المتميزين</h3>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                يحتوي فريق أطباء الشفاء على نخبة وكوكبة متميزة من الأساتذة
+                والأطباء المعروفين بنبوغهم وتفوقهم وشهرتهم في المجال الطبي
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img
+                src="assets/img/testimonials/testimonials-3.jpg"
+                class="testimonial-img"
+                alt=""
+              />
+              <h2 class="text-warning">صيادلة الشفاء</h2>
+              <h3>نخبة وكوكبة من الصيادلة المتميزين</h3>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                يحتوي فريق صيادلة الشفاء على نخبة وكوكبة متميزة من الأساتذة
+                والأطباء المعروفين بنبوغهم وتفوقهم وشهرتهم في المجال الطبي
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img
+                src="assets/img/testimonials/testimonials-4.jpg"
+                class="testimonial-img"
+                alt=""
+              />
+              <h2 class="text-warning">معامل الشفاء</h2>
+              <h3>نخبة وكوكبة من الكيميائيين المتميزين</h3>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                يحتوي فريق الكيميائيين على نخبة وكوكبة متميزة من الأساتذة
+                والأطباء المعروفين بنبوغهم وتفوقهم وشهرتهم في مجال التحاليل الطبية
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img
+                src="assets/img/testimonials/testimonials-5.jpg"
+                class="testimonial-img"
+                alt=""
+              />
+              <h2 class="text-warning">بنك الدم</h2>
+              <h3>مجموعة ضخمة من فصائل الدم</h3>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                قمنا بجمع وترتيب وتنسيق بيانات المتبرعين بالتعاون مع فريق شباب
+                جوجر وميت الكرماء والقرى التي تم حصرها وسردها وتسجيلها
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+  <!-- End Testimonials Section -->
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="info-box">
+                <i class="bx bx-map"></i>
+                <h3 style="color:  #2c3e50  ">عنواننا</h3>
+                <p>قرية جوجر - مركز طلخا - دقهلية</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-box mt-4">
+                <i class="bx bx-envelope"></i>
+                <h3 style="color: black">راسلنا عبر الإيميل</h3>
+                <p><a href="mailto:elprofessor6117@gmail.com">elprofessor6117@gmail.com </a> <br />
+                <a href="mailto:elprofessor20121@gmail.com">elprofessor20121@gmail.com </a></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-box mt-4">
+                <i class="bx bx-phone-call"></i>
+                <h3 style="color: black">راسلنا عبر الهاتف</h3>
+                <p style="direction: ltr" class="h3">
+                  <a href="tel:01096442318"> 01096442318</a></p>
+                  <a href="tel:01091326117"> 01091326117</a><br />
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mt-4 mt-lg-0">
+          <form method="post" role="form">
+            {% csrf_token %}
+            <div class="row">
+              <h4 class="text-center mb-0 p-3 rounded" style="color:  #2c3e50  ">
+                <i class="fas fa-envelope-open-text"></i>
+                أرسل رسالة لمدير الموقع
+              </h4>
+              <div class="col-md-6 form-group">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  id="name"
+                  placeholder="الاسم"
+                  required
+                />
+              </div>
+              <div class="col-md-6 form-group mt-1">
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="البريد الإلكتروني"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group mt-1">
+              <input
+                type="text"
+                class="form-control"
+                name="title"
+                id="subject"
+                placeholder="عنوان الرسالة"
+                required
+              />
+            </div>
+            <div class="form-group mt-1">
+              <textarea
+                style="resize: none"
+                class="form-control"
+                name="body"
+                rows="5"
+                placeholder="محتوى الرسالة"
+                required
+              ></textarea>
+            </div>
+            {% if request.method == 'POST' %}
+            <div class="my-3 text-center">
+              <div class="sent-message">
+                تم إرسال رسالتك بنجاح، شكرًا لك على تواصلك معنا
+              </div>
+            </div>
+            {% endif %}
+            <div class="text-center">
+              <button
+                style="background-color:  #2c3e50  "
+                class="btn rounded mt-1 text-white form-control"
+                type="submit"
+              >
+                إرسال الرسالة
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Contact Section -->
+</main>
+<!-- End #main -->
+
+{% endblock content %}
