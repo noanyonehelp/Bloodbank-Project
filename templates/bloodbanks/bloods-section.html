@@ -2,7 +2,7 @@
 {% load qr_code %}
 {% load mathfilters %}
 
-{% if count_search == 0 or countA1 == '0' or countJoger == '0' or countKorama == '0' or countA2 == '0' or countB1 == '0' or countB2 == '0' or countAB1 == '0' or countAB2 == '0' or countO1 == '0' or countO2 == '0' %}
+{% if count_search == 0 or countA1 == '0' or countJoger == '0' or countKorama == '0' or countA2 == '0' or countB1 == '0' or countB2 == '0' or countAB1 == '0' or countAB2 == '0' or countO1 == '0' or countO2 == '0' or count_two_filters == 0 %}
 
 <div class="container d-flex justify-content-center align-items-center">
   <div class="row">
@@ -29,7 +29,10 @@
   {% for bloodbank in bloodbanks %}
   <div class="row bg-light pt-3 rounded pt-1 mb-3">
     <div class="col-2">
-      <a href="{% url 'profilebloodbank' bloodbank.id %}"><img class="d-inline" style="width: 70px;height:70px;" src="{% static '../static/assets/img/bloodbank.png' %}"> </a>
+      <a class="position-relative" href="{% url 'profilebloodbank' bloodbank.id %}"><img class="d-inline" style="width: 70px;height:70px;" src="{% static '../static/assets/img/bloodbank.png' %}">
+
+        <small class="position-absolute text-light bg-dark p-1 rounded" style="top:70%; right:25%">{{forloop.counter}}</small>
+      </a>
       </div>
     <div class="col-7">
 
