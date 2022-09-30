@@ -108,7 +108,7 @@
               {% if request.user.is_authenticated and not request.user.is_anonymous and request.user.username in request.path %}
               <hr class="mt-3 mb-2 p-0">
                 <p>إجراء خطير - انتبه جيدًا</p>
-                <a data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger">حذف الحساب</a>
+                <a data-toggle="modal" data-target="#confirm-delete-account" class="btn btn-danger">حذف الحساب</a>
                 {% endif %}
                 {% include 'partials/confirm-delete-account.html' %}
               <hr class="mt-2 p-0">
