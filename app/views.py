@@ -164,7 +164,7 @@ def bloodbanks(request):
     #End Paginator
 
     
-    return render(request,'bloodbanks/bloodbanks.html',{"title": 'فصائل الدم', 'bloodbanks':bloodbanks, 'today':today, 'bloodbanks_list':bloodbanks_list, 'count':count, 'count_search':count_search, 'sort':sort, 'status': status, 'countA1':countA1, 'countJoger':countJoger, 'countKorama':countKorama, 'countA2': countA2, 'countB1':countB1, 'countB2':countB2, 'countAB1':countAB1, 'countAB2':countAB2, 'countO1':countO1,'countO2':countO2, 'sort_city':sort_city, 'sort_type': sort_type, 'count_two_filters':count_two_filters, 'latestBloodbanks':latestBloodbanks, 'bloodbankEXISTS':bloodbankEXISTS, 'alertMessage':'هل فعلا تريد حذف بيانات فصيلة الدم الخاصة بك؟'})
+    return render(request,'bloodbanks/bloodbanks.html',{"title": 'فصائل الدم', 'bloodbanks':bloodbanks, 'today':today, 'bloodbanks_list':bloodbanks_list, 'count':count, 'count_search':count_search, 'sort':sort, 'status': status, 'countA1':countA1, 'countJoger':countJoger, 'countKorama':countKorama, 'countA2': countA2, 'countB1':countB1, 'countB2':countB2, 'countAB1':countAB1, 'countAB2':countAB2, 'countO1':countO1,'countO2':countO2, 'sort_city':sort_city, 'sort_type': sort_type, 'count_two_filters':count_two_filters, 'latestBloodbanks':latestBloodbanks, 'bloodbankEXISTS':bloodbankEXISTS, 'bloodbank_name':bloodbank_name, 'alertMessage':'هل فعلا تريد حذف بيانات فصيلة الدم الخاصة بك؟'})
 
 
 def bloodbank_profile(request, id):

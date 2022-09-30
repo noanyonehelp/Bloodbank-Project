@@ -14,7 +14,7 @@
 <form method="GET" class="container form w-100 m-auto text-center" action="#bloodbanks_section" id="form">
   {% csrf_token %}
   <div class="form-group">
-    <input list="bloodbankslist" type="text" class="form-control text-center text-muted" id="search_bloodbank" name="search_bloodbank" placeholder="ابحث هنا" required>
+    <input list="bloodbankslist" type="text" class="form-control text-center text-muted" id="search_bloodbank" name="search_bloodbank" placeholder="ابحث هنا" required value="{% if bloodbank_name == None %}{% else %}{{bloodbank_name}}{% endif %}">
     <datalist id="bloodbankslist">
       {% for bloodbank in bloodbanks %}
         <option value="{{bloodbank.bloodbank_name}}" ></option>
