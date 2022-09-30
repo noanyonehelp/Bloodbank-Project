@@ -6,17 +6,11 @@
                 <b>تحذير - انتبه</b>
             </div>
             <div class="modal-body">
-                {{alertMessage}}
+                هل فعلا تريد حذف بيانات فصيلة الدم الخاصة بك؟
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">إلفاء</button>
-                <a class="btn btn-danger btn-ok" 
-                
-                {% if 'profile' in request.path %}
-                href="{% url 'deleteCommentBloodbank' profile.id user.id comment.id %}"                
-                {% else %}
-                href="{% url 'delete' bloodbank.id %}"
-                {% endif %}>حذف
+                <a class="btn btn-danger btn-ok" href="{% url 'delete' bloodbank.id %}">حذف
             </a>
             </div>
         </div>

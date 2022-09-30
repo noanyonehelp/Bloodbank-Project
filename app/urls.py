@@ -15,5 +15,7 @@ urlpatterns=[
     
     path('comment/<int:profileID>/userID/<int:userID>/deleteComment/<int:commentID>', views.deleteCommentBloodbank, name='deleteCommentBloodbank'),
 
-    path('comment/<int:bloodbankID>/userID/<int:userID>/editComment/<int:commentID>', views.editCommentBloodbank, name='editCommentBloodbank')
+    path('comment/<int:bloodbankID>/userID/<int:userID>/editComment/<int:commentID>', views.editCommentBloodbank, name='editCommentBloodbank'),
+
+    path('deleteAccount/<int:userID>/', views.deleteAccount, name='deleteAccount')
 ]

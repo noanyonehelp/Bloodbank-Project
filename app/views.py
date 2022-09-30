@@ -7,6 +7,8 @@ import time
 from .forms import BloodBankCreationForm, CommentForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -322,3 +324,10 @@ def editCommentBloodbank(request, bloodbankID, userID, commentID):
 
     return render(request, 'partials/editComment.html', {'profile':bloodbankID, 'page': 'فصيلة دم: '  + bloodbankID.bloodbank_name, 'comment':commentID, 'url': 'profilebloodbank'})
     
+def deleteAccount(request, userID):
+    
+    userID = request.user.id
+    logout(request)
+    deleteUSer = User.objects.get(id=userID)
+    deleteUSer.delete()
+    return redirect('bloodbanks')

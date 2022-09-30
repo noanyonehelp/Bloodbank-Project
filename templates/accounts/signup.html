@@ -45,6 +45,7 @@
             <div class="row mb-2">
                 <div class="col-md-12">
                         <input required id="id_password" class="form-control" name="password" placeholder="كلمة المرور" type="password" value="{% if password == None %}{% else %}{{password}}{% endif %}">
+                        <small class="text-muted">يستحسن أن تتكون كلمة السر من حروف وأرقام ورموز</small>
                     </div>
 
             </div>
@@ -54,7 +55,7 @@
 
 
 
-            <button name="btnsignup" type="submit" class="form-control btn btn-primary mt-3"{% if messages %}{% for message in messages %}{% if message.tags == 'success' %}disabled{% endif %}{% endfor %}{% endif %}
+            <button name="btnsignup" type="submit" class="form-control btn btn-primary mt-3"{% if messages %}{% for message in messages %}{% if message.tags == 'success' %}disabled style="display:none;"{% endif %}{% endfor %}{% endif %}
 
             >إنشاء حساب جديد</button>
 

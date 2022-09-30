@@ -23,9 +23,8 @@
             <div class="form-group">
             <input name="username" class="form-control mt-2" type="text" placeholder="اسم المستخدم">
             <input name="password" class="form-control mt-2" type="password" placeholder="كلمة السر">
-            <button type="submit" class="btn btn-primary form-control mt-2" name="login">تسجيل الدخول</button>
+            <button type="submit" class="btn btn-primary form-control mt-2" name="login" {% if messages %}{% for message in messages %}{% if message.tags == 'success' %}disabled style="display:none;"{% endif %}{% endfor %}{% endif %}>تسجيل الدخول</button>
 
-            
             {% if messages %}
                 {% for message in messages %}
                 {% if message.tags == 'success' %}

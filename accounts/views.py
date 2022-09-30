@@ -58,7 +58,7 @@ def account_profile(request, id, username):
     user_adds = None
     user_profile = User.objects.get(id=id, username=username)
 
-    return render(request, 'accounts/account_profile.html', {'user_profile': user_profile, 'title': 'الصفحة الشخصية', 'user_adds': user_adds, 'bloodbankEXISTS':bloodbankEXISTS, 'bloodbank':bloodbank})
+    return render(request, 'accounts/account_profile.html', {'user_profile': user_profile, 'title': 'الصفحة الشخصية', 'user_adds': user_adds, 'bloodbankEXISTS':bloodbankEXISTS, 'bloodbank':bloodbank, 'alertMessage':'هل فعلا تريد حذف الحساب؟'})
 
 @login_required
 def edit_account(request, id, username):
