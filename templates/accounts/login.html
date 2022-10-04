@@ -21,8 +21,13 @@
         <form class="form col-11 mx-auto" method="POST" action="{% url 'login' %}">
         {% csrf_token %}
             <div class="form-group">
-            <input name="username" class="form-control mt-2" type="text" placeholder="اسم المستخدم">
-            <input name="password" class="form-control mt-2" type="password" placeholder="كلمة السر">
+            <input name="username" class="form-control mt-2 text-right" type="text" placeholder="اسم المستخدم" dir="ltr">
+            <input name="password" class="form-control mt-2 text-right" id="id_password" type="password" placeholder="كلمة السر" dir="ltr">
+
+            <input id="pass-check" class="mt-1" type="checkbox" onclick="reveal()"> 
+            <label class="text-dark"> إظهار كلمة السر </label>
+
+
             <button type="submit" class="btn btn-primary form-control mt-2" name="login" {% if messages %}{% for message in messages %}{% if message.tags == 'success' %}disabled style="display:none;"{% endif %}{% endfor %}{% endif %}>تسجيل الدخول</button>
 
             {% if messages %}
@@ -51,5 +56,17 @@
     </div>
 </div>
 
+<script>
+    function reveal(){
+        var passCheck = document.getElementById('pass-check');
+        var passInput1 = document.getElementById('id_password');
 
+        if (passCheck.checked){
+            passInput1.type = 'text'
+
+        } else{
+            passInput1.type = 'password'
+        }
+    }
+</script>
 {% endblock content %}
