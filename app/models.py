@@ -1,4 +1,5 @@
 from datetime import datetime
+from random import choices
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -11,6 +12,12 @@ class BloodBank(models.Model):
         ("جوجر","جوجر"),
         ("ميت الكرماء","ميت الكرماء"),
     ]
+
+    yesno = [
+        ("جاهز","جاهز"),
+        ("غير جاهز","غير جاهز"),
+    ]
+
 
     types = [
         ("A+","A+"),
@@ -35,6 +42,9 @@ class BloodBank(models.Model):
     city =  models.CharField(max_length=50, null=True, choices=city, help_text="القرية")
 
     last_donation = models.DateField(default=None, null=1, blank=1)
+
+    ready_to_donation = models.CharField(max_length=20, choices=yesno, null=1, blank=1, default=None)
+
     count_views = models.IntegerField(null=True, blank=True, default=0)
 
     favourite = models.ManyToManyField(User, related_name='favourite', blank=True)

@@ -140,6 +140,18 @@
         <i class="fa-sharp fa-solid fa-business-time mx-1"></i>
         تبرع منذ</th><th scope="col" style="direction:ltr" class="text-center">{{profile.last_donation|timesince}}</th></tr>
   
+        <tr><th scope="col" style="direction:rtl" class="text-right">
+          <i class="fas fa-clipboard-check mx-1"></i>
+          جاهز للتبرع</th><th scope="col" style="direction:ltr" class="text-center {% if profile.ready_to_donation == "جاهز" %} text-success{% else %}text-danger{% endif %}">
+          {{profile.ready_to_donation}} للتبرع
+          {% if profile.ready_to_donation == "جاهز" %}
+          <i class="fas fa-clipboard-check text-success mx-1"></i>
+          {% else %}
+          <i class="fas fa-times-circle text-danger mx-1"></i>
+          {% endif %}
+
+        </th></tr>
+  
 
     {% include 'bloodbanks/like_section.html' %}
     

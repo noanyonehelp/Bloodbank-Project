@@ -64,9 +64,9 @@
                         </div>
 
                         <div class="mt-3 col-6 col-sm-6 col-xs-12" >
-                            <label class="form-label" for="bloodbank_type">القرية</label>
+                            <label class="form-label" for="city">القرية</label>
                         
-                            <select class="form-control" name="city">                         
+                            <select class="form-control" id="city" name="city">                         
                             <option value="" selected disabled>{{bloodbank.city}}</option>
                             <option value="جوجر">جوجر</option>
                             <option value="ميت الكرماء">ميت الكرماء</option>
@@ -82,6 +82,19 @@
                                 value="{{bloodbank.last_donation|date:'Y-m-d'}}">
                             <small class="text-muted mb-3">تاريخ آخر تبرع (شهر - يوم - سنة)</small>
                         </div>
+
+
+                        <div class="mt-3 col-6 col-sm-6 col-xs-12" >
+                            <label class="form-label" for="ready_to_donation">جاهز للتبرع أم لا؟</label>
+                        
+                            <select class="form-control" name="ready_to_donation">                         
+                            <option value="" selected disabled>{{bloodbank.ready_to_donation}}</option>
+                            <option value="جاهز">جاهز</option>
+                            <option value="غير جاهز">غير جاهز</option>
+                            </select>
+                            <small class="text-muted mb-3">جاهزية المتبرع</small>
+                        </div>
+
 
                     </div>
                 </div>

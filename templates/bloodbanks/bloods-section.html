@@ -76,12 +76,23 @@
      
       <div class="col-3">
       
-          <a class="copy btn text-primary my-2 h6 d-inline" data-content="
-          اسم صاحب الفصيلة: {{bloodbank.bloodbank_name}} &amp; &nbsp; رقم الموبايل: {{bloodbank.mobile}} &amp; &nbsp; نوع الفصيلة: {{bloodbank.type}} &amp; &nbsp; العنوان: {{bloodbank.bloodbank_addr}}"> <i class="fas fa-copy"></i> </a>
+          {% comment %} <a class="copy btn text-primary my-2 h6 d-inline" data-content="
+          اسم صاحب الفصيلة: {{bloodbank.bloodbank_name}} &amp; &nbsp; رقم الموبايل: {{bloodbank.mobile}} &amp; &nbsp; نوع الفصيلة: {{bloodbank.type}} &amp; &nbsp; العنوان: {{bloodbank.bloodbank_addr}}"> <i class="fas fa-copy"></i> </a> {% endcomment %}
 
-          <a href="{% url 'profilebloodbank' bloodbank.id %}" class="text-primary d-inline">
+          {% comment %} <a href="{% url 'profilebloodbank' bloodbank.id %}" class="text-primary d-inline">
             <i class="fa-solid fa-circle-info"></i>
-          </a>
+          </a> {% endcomment %}
+
+          {% if bloodbank.ready_to_donation == "جاهز" %}
+          جاهز للتبرع
+          <i class="fas fa-clipboard-check text-success mx-1"></i>
+
+
+          {% else %}
+          غير جاهز للتبرع
+          <i class="fas fa-times-circle text-danger mx-1"></i>
+          {% endif %}
+
               <br>
 
           {% if user.is_authenticated and bloodbank.user == request.user %}

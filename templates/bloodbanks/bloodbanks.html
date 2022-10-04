@@ -122,7 +122,7 @@
                   <div class="row">
                     <div class="col">
                       <select required="required" class="form-control" id="id_sort" name="sort_city">
-                        <option selected="selected" disabled>اختر المنطقة:</option>
+                        <option selected="selected" disabled>المنطقة:</option>
                         <option value="جوجر" {% if sort_city == 'جوجر' %}selected{% endif %}>فصائل جوجر</option>
                         <option value="ميت الكرماء" {% if sort_city == 'ميت الكرماء' %}selected{% endif %}>فصائل ميت الكرماء</option>
                        </select>
@@ -130,7 +130,7 @@
 
                     <div class="col">
                       <select required="required" class="form-control" id="id_sort" name="sort_type">
-                        <option selected="selected" disabled>اختر النوع:</option>
+                        <option selected="selected" disabled>النوع:</option>
                         <option value="A+" {% if sort_type == 'A+' %}selected{% endif %}>A+</option>
                         <option value="A-" {% if sort_type == 'A-' %}selected{% endif %}>A-</option>
                         <option value="B+" {% if sort_type == 'B+' %}selected{% endif %}>B+</option>
@@ -142,8 +142,15 @@
                       </select>
                     </div>
 
+                    <div class="col">
+                      <select required="required" class="form-control" id="id_sort_ready" name="sort_ready">
+                        <option selected="selected" disabled>الجاهزية:</option>
+                        <option value="جاهز" {% if sort_ready == 'جاهز' %}selected{% endif %}>جاهز للتبرع</option>
+                        <option value="غير جاهز" {% if sort_ready == 'غير جاهز' %}selected{% endif %}>غير جاهز للتبرع</option>
+                      </select>
+                    </div>
                 </div>
-              <input class="form-control btn btn-info text-white" style="" type="submit" name="two_filters" value="فرز المنطقة والفصيلة">
+              <input class="form-control btn btn-info text-white" style="" type="submit" name="three_filters" value="فرز المنطقة والفصيلة والجاهزية">
             </form>
           </div>
 
@@ -157,7 +164,7 @@
       <div class="container rounded">
         <div class="row">
           <div class="col-md-12">
-            {% if count_search == 0 or countA1 == '0' or countJoger == '0' or countKorama == '0' or countA2 == '0' or countB1 == '0' or countB2 == '0' or countAB1 == '0' or countAB2 == '0' or countO1 == '0' or countO2 == '0' or count_two_filters == 0 %}
+            {% if count_search == 0 or countA1 == '0' or countJoger == '0' or countKorama == '0' or countA2 == '0' or countB1 == '0' or countB2 == '0' or countAB1 == '0' or countAB2 == '0' or countO1 == '0' or countO2 == '0' or count_three_filters == 0 %}
             <h5 class="alert alert-danger text-center p-3">{{status}}</h5>
 
             {% else %}
@@ -169,7 +176,7 @@
     </section><!-- End Breadcrumbs -->
 
 
-
+    
     {% include 'bloodbanks/bloods-section.html' %}
 
      

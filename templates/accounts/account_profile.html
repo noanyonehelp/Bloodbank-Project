@@ -56,32 +56,92 @@
 
               {% if bloodbankEXISTS and request.user.is_authenticated %}
                 <hr>
-                <p>
+                <table class="table table-sm table-responsive table-light table-bordered">
+                  <tbody>
+                    <tr> <th>
+                <p class="text-right float-right">
                   <i class="fa fa-user mx-2" aria-hidden="true"></i>
-                  اسم صاحب الفصيلة: <b class="text-danger">{{bloodbank.bloodbank_name}}</b> </p>
-                  <p>
+                  اﻻسم 
+                  <th class="text-center">
+                  <b class="text-danger">{{bloodbank.bloodbank_name}}</b> </p>
+                  </th>
+                </th></tr>
+                  
 
-                <p>
+                <tr> <th>
+                <p class="text-right float-right">
                   <i class="fa-solid fa-droplet mx-2"></i>
-                  نوع فصيلة الدم: <b class="text-danger">{{bloodbank.type}}</b> </p>
-                  <p>
+                  نوع الفصيلة 
+                  <th class="text-center">
+                  <b class="text-danger">{{bloodbank.type}}</b> </p>
+                  </th>
+                </th></tr>
+               
+
+                <tr> <th>
+                  <p class="text-right float-right">
                     <i class="fa-solid fa-mobile-button mx-2"></i>
-                    رقم المحمول:
+                  المحمول
+                    <th class="text-center">
                   <a href="tel:{{bloodbank.mobile}}">{{bloodbank.mobile}}</a>  
                   </p>
+                </th>
+                  </th></tr>
 
-                  <p>
+                  <tr> <th>
+                  <p class="text-right float-right">
                     <i class="fa-solid fa-location-dot mx-2"></i>
-                    العنوان:
+                    العنوان
+                    <th class="text-center">
                   <b class="text-danger">{{bloodbank.bloodbank_addr}}</b> 
                   </p>
+                </th>
+                </th></tr>
 
-                  <p>
-                    <i class="fa-solid fa-city"></i>
-                    تابع لقرية:
+                <tr> <th>
+                  <p class="text-right float-right">
+                    <i class="fa-solid fa-city mx-2"></i>
+                    القرية
+                    <th class="text-center">
                   <b class="text-danger">{{bloodbank.city}}</b> 
                   </p>
-              
+                </th>
+                </th></tr>
+
+                <tr> <th>
+                  <p class="text-right float-right">
+                    <i class="fas fa-hand-holding-medical mx-2"></i>
+                  آخر تبرع
+                    <th class="text-center">
+                  <b class="text-danger">{{bloodbank.last_donation}}</b> 
+                  </p>
+                </th>
+                </th></tr>
+
+                <tr> <th>
+                  <p class="text-right float-right">
+                    <i class="fa-sharp fa-solid fa-business-time mx-2"></i>
+                    تبرع منذ
+                    <th class="text-center">
+                  <b class="text-danger" dir="ltr">{{bloodbank.last_donation|timesince}}</b> 
+                  </p>
+                </th>
+                </th></tr>
+
+                <tr> <th>
+                  <p class="text-right float-right">
+                    <i class="fas fa-clipboard-check mx-2"></i>
+                    جاهز للتبرع
+                    <th class="text-center">
+                  <b class="text-danger">{{bloodbank.ready_to_donation}}</b> 
+                  </p>
+                </th>
+                </th></tr>
+
+                  </tbody>
+                </table>
+
+
               <button type="button" class="btn btn-dark mt-2 btn-rounded btn-lg text-light">
                 <a title="تحديث بيانات فصيلة الدم" href="{% url 'editbloodbank' bloodbank.id %}" class="text-light">
                   <i class="fas fa-edit mx-2  "></i>

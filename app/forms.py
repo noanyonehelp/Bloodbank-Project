@@ -2,6 +2,11 @@ from django import forms
 from .models import Comment, BloodBank
 
 class BloodBankCreationForm(forms.ModelForm):
+    yesno = [
+        ("جاهز","جاهز"),
+        ("غير جاهز","غير جاهز"),
+    ]
+
     bloodbank_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'اﻻسم', 'autofocus': 'autofocus'}), help_text='اﻻسم')
 
     bloodbank_addr = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'العنوان '}), help_text='العنوان')
@@ -9,6 +14,8 @@ class BloodBankCreationForm(forms.ModelForm):
     mobile = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'رقم الهاتف المحمول: Mobile Number'}), help_text='رقم الهاتف المحمول', max_length=11, initial='01')
 
     last_donation = forms.DateField(widget=forms.DateInput({'placeholder':'تاريخ آخر تبرع', 'type':'date'}), help_text='تاريخ آخر تبرع', required=True)
+
+    ready_to_donation = forms.ChoiceField(choices= yesno, help_text='جاهز للتبرع أم لا؟')
 
     class Meta:
         model = BloodBank
