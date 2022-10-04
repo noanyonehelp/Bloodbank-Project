@@ -13,8 +13,8 @@
 <br>
         تم التطوير والمتابعة بواسطة فريق الشفاء {% now 'Y' %} <br> <br>
         <i class="fas fa-calendar-day mx-2"></i>
-        <h4 class="d-inline">اليوم:  </h4>
-        <h4 class="d-inline text-info">
+        <h6 class="d-inline">اليوم:  </h6>
+        <h6 class="d-inline text-info">
         {% now 'l' as day %}
         {% if day == 'Friday' %} الجمعة {% endif %}
         {% if day == 'Saturday' %} السبت {% endif %}
@@ -23,18 +23,18 @@
         {% if day == 'Tuesday' %} الثلاثاء {% endif %}
         {% if day == 'Wednesday' %} الأربعاء {% endif %}
         {% if day == 'Thursday' %} الخميس {% endif %}
-      </h4>
-        <p class="h4">
+      </h6>
+        <p class="h6">
           <i class="fa-solid fa-calendar-days mx-2"></i>
-          تاريخ اليوم:  <b class="text-info h4"> {% now "j-n-Y" %} م</b> </p>
+          تاريخ اليوم:  <b class="text-info h6"> {% now "j-n-Y" %} م</b> </p>
         {% load tz %} 
         
         {% timezone "Africa/Cairo" %}
-        <p id="clock" class="h4">
+        <p id="clock" class="h6">
           <i class="fas fa-clock mx-2"></i>
-          الساعة الآن:  <b class="text-info h4"> {% now "h:i A" %}</b> </p>
+          الساعة الآن:  <b class="text-info h6"> {% now "h:i A" %}</b> </p>
 
-        <p class="p-0 mt-0 alert alert-secondary p-1 w-lg-25 w-md-75 w-sm-100 w-xs-100 m-auto">
+        <p class="h6 p-0 mt-0 alert alert-secondary text-dark p-1 w-lg-25 w-md-75 w-sm-100 w-xs-100 m-auto">
           <i class="fas fa-spa mt-1 mx-1"></i>
            إذا رأيت تأخيرًا في التوقيت، فقط اضغط على <a href="#clock" action="" onclick="window.location.reload();" class="text-danger h5">  Refresh
            <i class="fa-solid fa-arrows-rotate"></i> 
