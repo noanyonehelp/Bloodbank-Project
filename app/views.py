@@ -219,7 +219,8 @@ def addnewbloodbank(request):
             mobile = request.POST.get('mobile'),
             type = request.POST.get('type'),
             city = request.POST.get('city'),
-            user = request.user
+            user = request.user,
+            last_donation = request.POST.get('last_donation')
         )
         bloodbank.save()
         return redirect('/#{}'.format(bloodbank.id))
@@ -242,7 +243,7 @@ def edit(request, id):
         bloodbank.bloodbank_name = request.POST.get('bloodbank_name')
         bloodbank.bloodbank_addr = request.POST.get('bloodbank_addr')
         bloodbank.mobile = request.POST.get('mobile')
-
+        bloodbank.last_donation = request.POST.get('last_donation')
         if 'type' in request.POST: bloodbank.type = request.POST.get('type')
         else: bloodbank.type = bloodbank.type
 
@@ -250,7 +251,7 @@ def edit(request, id):
         else: bloodbank.city = bloodbank.city
 
         bloodbank.save()
-        return redirect('bloodbanks')
+        return redirect('/profile/{}'.format(bloodbank.id))
 
 
     return render(request, 'bloodbanks/editblood.html', {'bloodbank':bloodbank, 'title':'تعديل بيانات فصيلة الدم'})

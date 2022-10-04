@@ -20,7 +20,7 @@
                         <div class="container">
                             <div class="row">
 
-                        <div class="col-6 col-sm-6 col-xs-12">
+                        <div class="mt-3 col-6 col-sm-6 col-xs-12">
                             <label class="form-label" for="bloodbank_name">الاسم</label>
                             <input autofocus type="text" id="bloodbank_name"
                                 name="bloodbank_name" class="form-control"
@@ -28,7 +28,7 @@
                             <small class="text-muted mb-3">اسم صاحب فصيلة الدم</small>
                         </div>
 
-                        <div class="col-6 col-sm-6 col-xs-12">
+                        <div class="mt-3 col-6 col-sm-6 col-xs-12">
                             <label class="form-label mt-2" for="bloodbank_addr">العنوان</label>
                             <input type="text" id="bloodbank_addr"
                                 name="bloodbank_addr" class="form-control"
@@ -36,7 +36,7 @@
                             <small class="text-muted mb-3">عنوان صاحب فصيلة الدم</small>
                         </div>
 
-                        <div class="col-6 col-sm-6 col-xs-12">
+                        <div class="mt-3 col-6 col-sm-6 col-xs-12">
                             <label class="form-label" for="mobile">رقم المحمول</label>
                             <input id="mobile" class="number form-control"
                                 placeholder="رقم المحمول" maxlength="11"
@@ -46,7 +46,7 @@
                         </div>
 
 
-                        <div class="col-6 col-sm-6 col-xs-12" >
+                        <div class="mt-3 col-6 col-sm-6 col-xs-12" >
                             <label class="form-label" for="bloodbank_type">النوع</label>
                             
                             <select class="form-control" name="type">                         
@@ -63,8 +63,7 @@
                             <small class="text-muted mb-3">نوع فصيلة الدم</small>
                         </div>
 
-
-                        <div class="col-6 col-sm-6 col-xs-12" >
+                        <div class="mt-3 col-6 col-sm-6 col-xs-12" >
                             <label class="form-label" for="bloodbank_type">القرية</label>
                         
                             <select class="form-control" name="city">                         
@@ -75,7 +74,15 @@
                             <small class="text-muted mb-3">قرية صاحب الفصيلة</small>
                         </div>
 
-                        
+
+                        <div class="mt-3 col-6 col-sm-6 col-xs-12">
+                            <label class="form-label" for="datetimepicker1">تاريخ آخر تبرع</label>
+                            <input id="datetimepicker1" required
+                                name="last_donation" class="form-control"
+                                value="{{bloodbank.last_donation|date:'Y-m-d'}}">
+                            <small class="text-muted mb-3">تاريخ آخر تبرع (شهر - يوم - سنة)</small>
+                        </div>
+
                     </div>
                 </div>
                         <button class="btn btn-success form-control mb-4"

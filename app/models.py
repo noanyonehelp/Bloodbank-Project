@@ -34,6 +34,7 @@ class BloodBank(models.Model):
 
     city =  models.CharField(max_length=50, null=True, choices=city, help_text="القرية")
 
+    last_donation = models.DateField(default=None, null=1, blank=1)
     count_views = models.IntegerField(null=True, blank=True, default=0)
 
     favourite = models.ManyToManyField(User, related_name='favourite', blank=True)

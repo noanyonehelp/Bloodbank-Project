@@ -127,13 +127,23 @@
    <tr><th scope="col" style="direction:rtl" class="text-right">
     <i class="fas fa-diagnoses mx-1"></i>
     نوع فصيلة الدم</th><th scope="col" style="direction:rtl" class="text-center h4">{{profile.type}}</th></tr>
+
    <tr><th scope="col" style="direction:rtl" class="text-right">
     <i class="fas fa-city mx-1"></i>
     تابع لقرية</th><th scope="col" style="direction:rtl" class="text-center">{{profile.city}}</th></tr>
       
+    <tr><th scope="col" style="direction:rtl" class="text-right">
+      <i class="fas fa-city mx-1"></i>
+      تاريخ آخر تبرع</th><th scope="col" style="direction:ltr" class="text-center">{{profile.last_donation|date:'d-F-Y'}}</th></tr>
+
+      <tr><th scope="col" style="direction:rtl" class="text-right">
+        <i class="fas fa-city mx-1"></i>
+        تبرع منذ</th><th scope="col" style="direction:ltr" class="text-center">{{profile.last_donation|timesince}}</th></tr>
+  
+
     {% include 'bloodbanks/like_section.html' %}
     
-{% if user.username == 'scriptor' %}
+{% if request.user.is_authenticated and not request.user.is_anonymous and profile.user == request.user %}
               
       <div class="container-fluid mt-4 text-center">
         <div class="row">

@@ -8,6 +8,8 @@ class BloodBankCreationForm(forms.ModelForm):
 
     mobile = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'رقم الهاتف المحمول: Mobile Number'}), help_text='رقم الهاتف المحمول', max_length=11, initial='01')
 
+    last_donation = forms.DateField(widget=forms.DateInput({'placeholder':'تاريخ آخر تبرع', 'type':'date'}), help_text='تاريخ آخر تبرع', required=True)
+
     class Meta:
         model = BloodBank
         fields = '__all__'
