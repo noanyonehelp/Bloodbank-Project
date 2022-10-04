@@ -6,7 +6,6 @@
 
 {% block content %}
 <br> <br> <br> <br>
-<h4 class="bg-secondary text-light text-center p-3"> الصفحة الشخصية </h4>
 <section class="mt-4" style="background-color: #eee; direction:rtl;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -21,8 +20,17 @@
                   <img title="QR-CODE" src="{% qr_url_from_text request.build_absolute_uri %}"
                   class="img-fluid d-inline mx-5" style="width: 100px;" />
               </div>
+              
 
+              <a
+              {% if bloodbank is not None %}
+              href="{% url 'profilebloodbank' bloodbank.id %}"
+              {% else %}
+              href="{% url 'profilebloodbank' profileBlood.id %}"
+              {% endif %}
+              >
               <p title="اﻻسم الأول والأخير" class="h3 d-inline text-primary">{{user_profile.first_name}}  {{user_profile.last_name}}</p>
+              </a>
               <h4 class="" title="اسم المستخدم">
               <i class="fas fa-cog"></i>
               اسم المستخدم: 
@@ -63,17 +71,16 @@
                   <i class="fa fa-user mx-2" aria-hidden="true"></i>
                   اﻻسم 
                   <th class="text-center">
-                  <b class="text-danger">{{bloodbank.bloodbank_name}}</b> </p>
+                  <b class="text-secondary">{{bloodbank.bloodbank_name}}</b> </p>
                   </th>
                 </th></tr>
                   
-
                 <tr> <th>
                 <p class="text-right float-right">
                   <i class="fa-solid fa-droplet mx-2"></i>
                   نوع الفصيلة 
                   <th class="text-center">
-                  <b class="text-danger">{{bloodbank.type}}</b> </p>
+                  <b class="text-secondary">{{bloodbank.type}}</b> </p>
                   </th>
                 </th></tr>
                
@@ -93,7 +100,7 @@
                     <i class="fa-solid fa-location-dot mx-2"></i>
                     العنوان
                     <th class="text-center">
-                  <b class="text-danger">{{bloodbank.bloodbank_addr}}</b> 
+                  <b class="text-secondary">{{bloodbank.bloodbank_addr}}</b> 
                   </p>
                 </th>
                 </th></tr>
@@ -103,7 +110,7 @@
                     <i class="fa-solid fa-city mx-2"></i>
                     القرية
                     <th class="text-center">
-                  <b class="text-danger">{{bloodbank.city}}</b> 
+                  <b class="text-secondary">{{bloodbank.city}}</b> 
                   </p>
                 </th>
                 </th></tr>
@@ -113,7 +120,7 @@
                     <i class="fas fa-hand-holding-medical mx-2"></i>
                   آخر تبرع
                     <th class="text-center">
-                  <b class="text-danger">{{bloodbank.last_donation}}</b> 
+                  <b class="text-secondary">{{bloodbank.last_donation}}</b> 
                   </p>
                 </th>
                 </th></tr>
@@ -123,7 +130,7 @@
                     <i class="fa-sharp fa-solid fa-business-time mx-2"></i>
                     تبرع منذ
                     <th class="text-center">
-                  <b class="text-danger" dir="ltr">{{bloodbank.last_donation|timesince}}</b> 
+                  <b class="text-secondary" dir="ltr">{{bloodbank.last_donation|timesince}}</b> 
                   </p>
                 </th>
                 </th></tr>
@@ -133,7 +140,12 @@
                     <i class="fas fa-clipboard-check mx-2"></i>
                     جاهز للتبرع
                     <th class="text-center">
-                  <b class="text-danger">{{bloodbank.ready_to_donation}}</b> 
+                      {% if bloodbank.ready_to_donation == "جاهز" %}
+                      <i class="fas fa-clipboard-check text-success mx-1"></i>
+                      {% else %}
+                      <i class="fas fa-times-circle text-danger mx-1"></i>
+                      {% endif %}
+                  <b class="text-{% if bloodbank.ready_to_donation == 'جاهز' %}success{% else %}danger{% endif %}">{{bloodbank.ready_to_donation}} للتبرع</b> 
                   </p>
                 </th>
                 </th></tr>
@@ -162,8 +174,7 @@
                   إضافة بيانات فصيلة الدم </a>
               </button>
 
-              {% endif %}
-
+              {% endif %} 
 
               {% if request.user.is_authenticated and not request.user.is_anonymous and request.user.username in request.path %}
               <hr class="mt-3 mb-2 p-0">
@@ -178,14 +189,14 @@
                   <p class="h3 fw-bolder">
                     <a href="{% url 'bloodbank_like_list' user_profile.username user_profile.id %}">{{user_profile.likeBloodbank.count}} </a>
                     </p>
-                  <p class="text-muted mb-0">إعجاباتي</p>
+                  <p class="text-muted mb-0">الإعجابات</p>
                   <i class="fa-solid fa-thumbs-up fa-2x text-secondary"></i>
                 </div>
                 <div class="col">
                   <p class="h3 fw-bolder">
                     <a href="{% url 'bloodbank_favourite_list' user_profile.username user_profile.id %}"> {{user_profile.favourite.count}} </a>
                   </p>
-                  <p class="text-muted mb-0">مفضلاتي</p>
+                  <p class="text-muted mb-0">المفضلات</p>
                   <i class="fa-solid fa-star fa-2x text-secondary"></i>
                 </div>
                 

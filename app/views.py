@@ -42,6 +42,9 @@ def bloodbanks(request):
     sort_city = None
     sort_type = None
     sort_ready = None
+    sort_readyOK = None
+    sort_readyNO = None
+    
     if request.method == 'GET' and 'three_filters' in request.GET:
         sort_city = request.GET.get('sort_city')
         sort_type = request.GET.get('sort_type')
@@ -122,6 +125,18 @@ def bloodbanks(request):
             countO2 = str(bloodbanks.filter(type='O-').count())
             status = 'تم الفرز حسب فصائل O- ، وعدد الفصائل: ' + countO2
 
+        elif sort == 'جاهز':
+            status = 'تم الفرز حسب الفصائل الجاهزة للتبرع'
+            bloodbanks = bloodbanks.filter(ready_to_donation='جاهز')
+            sort_readyOK = str(bloodbanks.filter(ready_to_donation='جاهز').count())
+            status = 'تم الفرز حسب الفصائل الجاهزة للتبرع ، وعددها : ' + sort_readyOK
+
+        elif sort == 'غير جاهز':
+            status = 'تم الفرز حسب الفصائل الغير جاهزة للتبرع'
+            bloodbanks = bloodbanks.filter(ready_to_donation='غير جاهز')
+            sort_readyNO = str(bloodbanks.filter(ready_to_donation='غير جاهز').count())
+            status = 'تم الفرز حسب الفصائل الغير جاهزة للتبرع ، وعددها : ' + sort_readyNO
+
         elif sort == 'all':
             status = 'تم الفرز حسب جميع الفصائل'
             bloodbanks = BloodBank.objects.all()
@@ -165,7 +180,7 @@ def bloodbanks(request):
     #End Paginator
 
     
-    return render(request,'bloodbanks/bloodbanks.html',{"title": 'فصائل الدم', 'bloodbanks':bloodbanks, 'today':today, 'bloodbanks_list':bloodbanks_list, 'count':count, 'count_search':count_search, 'sort':sort, 'status': status, 'countA1':countA1, 'countJoger':countJoger, 'countKorama':countKorama, 'countA2': countA2, 'countB1':countB1, 'countB2':countB2, 'countAB1':countAB1, 'countAB2':countAB2, 'countO1':countO1,'countO2':countO2, 'sort_city':sort_city, 'sort_type': sort_type, 'sort_ready':sort_ready, 'count_three_filters':count_three_filters, 'latestBloodbanks':latestBloodbanks, 'bloodbankEXISTS':bloodbankEXISTS, 'bloodbank_name':bloodbank_name, 'alertMessage':'هل فعلا تريد حذف بيانات فصيلة الدم الخاصة بك؟'})
+    return render(request,'bloodbanks/bloodbanks.html',{"title": 'فصائل الدم', 'bloodbanks':bloodbanks, 'today':today, 'bloodbanks_list':bloodbanks_list, 'count':count, 'count_search':count_search, 'sort':sort, 'status': status, 'countA1':countA1, 'countJoger':countJoger, 'countKorama':countKorama, 'countA2': countA2, 'countB1':countB1, 'countB2':countB2, 'countAB1':countAB1, 'countAB2':countAB2, 'countO1':countO1,'countO2':countO2, 'sort_city':sort_city, 'sort_type': sort_type, 'sort_ready':sort_ready, 'sort_readyOK':sort_readyOK, 'sort_readyNO':sort_readyNO, 'count_three_filters':count_three_filters, 'latestBloodbanks':latestBloodbanks, 'bloodbankEXISTS':bloodbankEXISTS, 'bloodbank_name':bloodbank_name, 'alertMessage':'هل فعلا تريد حذف بيانات فصيلة الدم الخاصة بك؟'})
 
 
 def bloodbank_profile(request, id):
@@ -206,7 +221,6 @@ def bloodbank_profile(request, id):
 
         )
         new_comment.save()
-        
     return render(request, 'bloodbanks/profilebloodbank.html',{'profile':profile, 'title': profile.bloodbank_name, 'comments':comments, 'commentForm':commentForm, 'count_views':profile.count_views, 'is_favourite':is_favourite, 'is_like_bloodbank': is_like_bloodbank, 'total_likes':total_likes, 'alertMessage':'هل فعلا تريد حذف هذا التعليق؟'})
 
 @login_required

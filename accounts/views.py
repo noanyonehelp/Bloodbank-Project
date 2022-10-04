@@ -1,3 +1,4 @@
+from time import sleep, time
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout
@@ -47,18 +48,21 @@ def logout_view(request):
     logout(request)
     return redirect('bloodbanks')
 
-@login_required
+
 def account_profile(request, id, username):
     bloodbankEXISTS = None
     bloodbank = None
-    if request.user.is_authenticated and not request.user.is_anonymous:
+    profileBlood = None
+    if request.user.is_authenticated and not request.user.is_anonymous and request.user.username in request.path:
         bloodbankEXISTS = BloodBank.objects.filter(user=request.user).exists()
         if bloodbankEXISTS:
             bloodbank = BloodBank.objects.get(user=request.user)
     user_adds = None
     user_profile = User.objects.get(id=id, username=username)
 
-    return render(request, 'accounts/account_profile.html', {'user_profile': user_profile, 'title': 'الصفحة الشخصية', 'user_adds': user_adds, 'bloodbankEXISTS':bloodbankEXISTS, 'bloodbank':bloodbank, 'alertMessage':'هل فعلا تريد حذف الحساب؟'})
+    if bloodbank is None:
+        profileBlood = BloodBank.objects.get(user=user_profile)
+    return render(request, 'accounts/account_profile.html', {'user_profile': user_profile, 'title': 'الصفحة الشخصية', 'user_adds': user_adds, 'bloodbankEXISTS':bloodbankEXISTS, 'bloodbank':bloodbank, 'alertMessage':'هل فعلا تريد حذف الحساب؟', 'profileBlood':profileBlood})
 
 @login_required
 def edit_account(request, id, username):

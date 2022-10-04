@@ -1,3 +1,5 @@
+{% if request.user.is_authenticated and not request.user.is_anonymous and request.user.username in request.path %}
+
 <div class="modal fade" id="confirm-delete-account" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -16,3 +18,7 @@
         </div>
     </div>
 </div>
+
+{% else %}
+
+{% endif %}

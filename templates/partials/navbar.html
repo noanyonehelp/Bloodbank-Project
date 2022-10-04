@@ -36,20 +36,7 @@
           مرحبًا:  {{user.first_name}} {{user.last_name}} </a>
       </a>
     
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-
-         
-
-      {% if 'bloodbanks' in request.path %}
-        <li><a class="dropdown-item text-right" href="{% url 'bloodbank_favourite_list' user.username user.id %}">
-          <i class="fa-solid fa-star"></i>
-          الفصائل المفضلة</a></li>
-
-          <li><a class="dropdown-item text-right" href="{% url 'bloodbank_like_list' user.username user.id %}">
-            <i class="fa-solid fa-thumbs-up"></i>
-            إعجابات الفصائل</a></li>
-       {% endif %}
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">       
 
         {% if request.path == '/accounts/password_change' %}
         
@@ -68,6 +55,15 @@
           <i class="fa-solid fa-user"></i>
           الصفحة الشخصية</a></li>
           
+          <li><a class="dropdown-item text-right" href="{% url 'bloodbank_favourite_list' user.username user.id %}">
+            <i class="fa-solid fa-star"></i>
+            الفصائل المفضلة</a></li>
+  
+            <li><a class="dropdown-item text-right" href="{% url 'bloodbank_like_list' user.username user.id %}">
+              <i class="fa-solid fa-thumbs-up"></i>
+              إعجابات الفصائل</a></li>
+
+              
         <li><a class="dropdown-item text-right" href="{% url 'password_change' %}">
           <i class="fa-solid fa-key"></i>
           تغيير كلمة السر</a></li>

@@ -109,7 +109,11 @@
 
       <th class="bg-primary text-white text-right" scope="col">
         <i class="fas fa-tint mx-1"></i>
-        اﻻسم</th><th class="text-center bg-primary text-white" scope="col">{{profile.bloodbank_name}}</th></tr>
+        اﻻسم</th><th class="text-center bg-primary text-white" scope="col">
+          
+        <a class="text-light" href="{% url 'account_profile' profile.user.id profile.user.username %}">  {{profile.bloodbank_name}} </a>
+        
+        </th></tr>
       
     </thead>
   <tbody class="">
