@@ -42,10 +42,12 @@
       </a>
       <span class="h6"> <i class="fa-solid fa-location-dot"></i> &nbsp;  </span> <span class="h6 text-secondary">{{bloodbank.bloodbank_addr}}</span><br>
 
-      <span class="h6 text-left"> <i class="fa-solid fa-location-dot" style="direction:ltr"></i> &nbsp; <b>آخر تبرع منذ: </b> </span>
-      
-      <span class="h6 text-secondary text-left" style="direction:ltr">
-        {{bloodbank.last_donation|timesince}}</span><br>
+
+      <hr class="m-0 p-0 w-25">
+      <div class="h6 mt-1 mb-1"> <i class="fa-solid fa-hand-holding-medical"></i> &nbsp;
+        <b> آخر تبرع منذ: </b>
+        <p dir="ltr" class="d-inline text-secondary"> {{bloodbank.last_donation|timesince}} </p>
+      </div>
 
       <span class="h5 mt-2"> <i class="fa-solid fa-mobile-screen-button"></i> &nbsp;  <b class="text-primary"><a href="tel:{{bloodbank.mobile}}"> {{bloodbank.mobile}}</a> </b></span> 
       | <a class="text-secondary mx-2"> <i class="fa-solid text-primary fa-thumbs-up"></i>   {{bloodbank.total_likes}} </a>
