@@ -2,13 +2,14 @@ from urllib import response
 from django.http import HttpResponse, HttpResponseRedirect, StreamingHttpResponse
 from django.shortcuts import redirect, render
 from .models import BloodBank
-from datetime import date
+from datetime import date, datetime
 import time
 from .forms import BloodBankCreationForm, CommentForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
@@ -184,6 +185,12 @@ def bloodbanks(request):
 
 
 def bloodbank_profile(request, id):
+    from datetime import date
+    from datetime import datetime
+    current_today = date.today()
+    current_year = date.year
+    current_month = date.month
+    current_day = date.day
 
     is_favourite = False
     is_like_bloodbank = False
@@ -221,7 +228,7 @@ def bloodbank_profile(request, id):
 
         )
         new_comment.save()
-    return render(request, 'bloodbanks/profilebloodbank.html',{'profile':profile, 'title': profile.bloodbank_name, 'comments':comments, 'commentForm':commentForm, 'count_views':profile.count_views, 'is_favourite':is_favourite, 'is_like_bloodbank': is_like_bloodbank, 'total_likes':total_likes, 'alertMessage':'هل فعلا تريد حذف هذا التعليق؟'})
+    return render(request, 'bloodbanks/profilebloodbank.html',{'profile':profile, 'title': profile.bloodbank_name, 'comments':comments, 'commentForm':commentForm, 'count_views':profile.count_views, 'is_favourite':is_favourite, 'is_like_bloodbank': is_like_bloodbank, 'total_likes':total_likes, 'alertMessage':'هل فعلا تريد حذف هذا التعليق؟', 'current_year':current_year, 'current_month':current_month, 'current_day':current_day, 'current_today':current_today})
 
 @login_required
 def addnewbloodbank(request):
@@ -238,8 +245,11 @@ def addnewbloodbank(request):
             last_donation = request.POST.get('last_donation'),
             ready_to_donation = request.POST.get('ready_to_donation')
         )
-        bloodbank.save()
-        return redirect('/#{}'.format(bloodbank.id))
+        if date.today().isoformat() < request.POST.get('last_donation'):
+            messages.error(request, 'لا يمكن أن يكون تاريخ آخر تبرع أكبر من تاريخ اليوم الحالي')
+        else:
+            bloodbank.save()
+            return redirect('/#{}'.format(bloodbank.id))
     else:
         form = BloodBankCreationForm()
     return render(request, 'bloodbanks/addnewbloodbank.html', {'form': form, 'title':"تسجيل فصيلة دم جديدة"})
@@ -253,7 +263,7 @@ def delete(request, id):
 
 @login_required
 def edit(request, id):
-
+    last_donation = request.POST.get('last_donation')
     bloodbank = BloodBank.objects.get(id=id)
     if request.method == 'POST':
         bloodbank.bloodbank_name = request.POST.get('bloodbank_name')
@@ -269,11 +279,14 @@ def edit(request, id):
         if 'ready_to_donation' in request.POST: bloodbank.ready_to_donation = request.POST.get('ready_to_donation')
         else: bloodbank.ready_to_donation = bloodbank.ready_to_donation
 
-        bloodbank.save()
-        return redirect('/profile/{}'.format(bloodbank.id))
+        if date.today().isoformat() < request.POST.get('last_donation'):
+            messages.error(request, 'لا يمكن أن يكون تاريخ آخر تبرع أكبر من تاريخ اليوم الحالي')
+        else:
+            bloodbank.save()
+            return redirect('/profile/{}'.format(bloodbank.id))
 
 
-    return render(request, 'bloodbanks/editblood.html', {'bloodbank':bloodbank, 'title':'تعديل بيانات فصيلة الدم'})
+    return render(request, 'bloodbanks/editblood.html', {'bloodbank':bloodbank, 'title':'تعديل بيانات فصيلة الدم', 'last_donation':last_donation})
 
 @login_required
 def favourite_bloodbank(request, id):
